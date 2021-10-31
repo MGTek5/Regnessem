@@ -1,4 +1,23 @@
-/* ./src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+}
+
+#root {
+  display: flex;
+  height:100vh;
+  width: 100vw;
+  flex-direction: column;
+}
+
+main {
+  flex:2;
+}

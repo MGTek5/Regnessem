@@ -1,16 +1,24 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/client';
+import client from './utils/apollo';
+import Page from './components/Page';
+import Router from './Router';
+import Header from './components/Header';
 
-function App() {
-  return (
-    <div className="flex flex-row items-center justify-center min-h-screen bg-gray-400">
-      <span role="img" aria-label="emoji">
-        🦄
-      </span>
-      <h1 className="text-4xl ml-2 font-semibold text-blue-100">
-        React + Tailwind CSS
-      </h1>
-    </div>
-  );
-}
+const App = () => (
+  <div className="w-screen h-screen flex flex-col">
+    <BrowserRouter>
+      <ApolloProvider client={client}>
+        <Header />
+        <main>
+          <Page>
+            <Router />
+          </Page>
+        </main>
+      </ApolloProvider>
+    </BrowserRouter>
+  </div>
+);
 
 export default App;
