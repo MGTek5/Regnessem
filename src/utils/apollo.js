@@ -14,7 +14,6 @@ const httpLink = new HttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('VIVI_godview_token');
   return {
     headers: {
       ...headers,
@@ -29,7 +28,7 @@ const wsLink = new WebSocketLink({
     reconnect: true,
     connectionParams: {
       headers: {
-        authorization: `Bearer ${localStorage.getItem('VIVI_godview_token')}`,
+        authorization: `Bearer ${'token'}`,
       },
     },
   },
