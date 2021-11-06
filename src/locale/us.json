@@ -1,0 +1,19 @@
+{
+  "translation": {
+    "header": {
+      "home": "Home"
+    },
+    "footer": {
+      "rgpd": "Legal notices"
+    },
+    "button": {
+      "submit": "Submit"
+    },
+    "login": {
+      "title": "Login",
+      "subtitle": "Type your email and password",
+      "email": "Email",
+      "password": "Password"
+    }
+  }
+}

@@ -5,6 +5,7 @@ import client from './utils/apollo';
 import Page from './components/Page';
 import Router from './Router';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 const App = () => (
   <div className="w-screen h-screen flex flex-col">
@@ -16,6 +17,7 @@ const App = () => (
             <Router />
           </Page>
         </main>
+        <Footer />
       </ApolloProvider>
     </BrowserRouter>
   </div>

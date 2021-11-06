@@ -1,0 +1,19 @@
+{
+  "translation": {
+    "header": {
+      "home": "Acceuil"
+    },
+    "footer": {
+      "rgpd": "Mentions légales"
+    },
+    "button": {
+      "submit": "Envoyer"
+    },
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Entrez votre email et mot de passe",
+      "email": "Email",
+      "password": "Mot de passe"
+    }
+  }
+}
