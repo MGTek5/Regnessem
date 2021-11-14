@@ -9,7 +9,7 @@ const Footer = () => {
   const { t, i18n } = useTranslation();
   if (NO_FOOTER_ROUTES.includes(location)) return null;
   return (
-    <footer className="flex justify-center items-center bg-gray-800 text-white">
+    <footer className="flex justify-center items-center bg-gray-800 text-white z-10">
       <a
         target="_blank"
         rel="noreferrer"

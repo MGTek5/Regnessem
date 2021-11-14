@@ -13,7 +13,8 @@
       "title": "Connexion",
       "subtitle": "Entrez votre email et mot de passe",
       "email": "Email",
-      "password": "Mot de passe"
+      "password": "Mot de passe",
+      "fun_boi": "J'suis rigodrole"
     }
   }
 }
