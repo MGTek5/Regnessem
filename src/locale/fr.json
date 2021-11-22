@@ -9,6 +9,14 @@
     "button": {
       "submit": "Envoyer"
     },
+    "register": {
+      "title": "Inscription",
+      "email":"Email",
+      "username":"Nom utilisateur",
+      "password":"Mot de passe",
+      "login":"se connecter",
+      "fun_boi": "J'suis rigodrole"
+    },
     "login": {
       "title": "Connexion",
       "subtitle": "Entrez votre email et mot de passe",

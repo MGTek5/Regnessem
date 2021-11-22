@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
-const NO_HEADER_ROUTES = ['/login'];
+const NO_HEADER_ROUTES = ['/login', '/register'];
 
 const Header = () => {
   const location = useLocation().pathname;

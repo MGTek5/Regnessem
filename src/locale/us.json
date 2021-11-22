@@ -9,6 +9,14 @@
     "button": {
       "submit": "Submit"
     },
+    "register": {
+      "title": "Register",
+      "email":"Email",
+      "username":"Username",
+      "password":"Password",
+      "login":"sign in",
+      "fun_boi": "I'm a fun boi"
+    },
     "login": {
       "title": "Login",
       "subtitle": "Type your email and password",
