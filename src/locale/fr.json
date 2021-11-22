@@ -1,0 +1,33 @@
+{
+  "translation": {
+    "header": {
+      "home": "Acceuil"
+    },
+    "footer": {
+      "rgpd": "Mentions légales"
+    },
+    "button": {
+      "submit": "Envoyer"
+    },
+    "register": {
+      "title": "Inscription",
+      "subtitle":"Créez votre compte en quelques clicks",
+      "email":"Email",
+      "username":"Nom utilisateur",
+      "password":"Mot de passe",
+      "login":"se connecter",
+      "fun_boi": "J'suis rigodrole"
+    },
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Entrez votre email et mot de passe",
+      "email": "Email",
+      "password": "Mot de passe",
+      "fun_boi": "J'suis rigodrole",
+      "register": "créer un compte"
+    },
+    "common": {
+      "error":"Il y a eu un problème"
+    }
+  }
+}

@@ -9,6 +9,8 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { BASE_URL, BASE_WS } from '../constant';
 
+const token = localStorage.getItem("regnessem-token")
+
 const httpLink = new HttpLink({
   uri: `${BASE_URL}/graphql`,
 });
@@ -17,7 +19,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${localStorage.getItem('regnessem-token')}` : '',
     },
   };
 });
@@ -28,7 +30,7 @@ const wsLink = new WebSocketLink({
     reconnect: true,
     connectionParams: {
       headers: {
-        authorization: `Bearer ${'token'}`,
+        authorization: `Bearer ${localStorage.getItem('regnessem-token')}`,
       },
     },
   },

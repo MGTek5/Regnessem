@@ -1,0 +1,33 @@
+{
+  "translation": {
+    "header": {
+      "home": "Home"
+    },
+    "footer": {
+      "rgpd": "Legal notices"
+    },
+    "button": {
+      "submit": "Submit"
+    },
+    "register": {
+      "title": "Register",
+      "subtitle":"You're just a few clicks away from creating your account",
+      "email":"Email",
+      "username":"Username",
+      "password":"Password",
+      "login":"sign in",
+      "fun_boi": "I'm a fun boi"
+    },
+    "login": {
+      "title": "Login",
+      "subtitle": "Type your email and password",
+      "email": "Email",
+      "password": "Password",
+      "fun_boi": "I'm a fun boi",
+      "register":"create an account"
+    },
+    "common": {
+      "error":"Something went wrong"
+    }
+  }
+}
