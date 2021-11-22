@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@apollo/client';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Input from '../components/Input';
 // import Button from '../components/Button';
@@ -64,6 +64,7 @@ const Login = () => {
                   <input type="checkbox" onChange={() => setIsAFunBoi((old) => !old)} checked={isAFunBoi} className="checkbox checkbox-primary" />
                 </div>
                 <button type="submit" className="btn btn-primary">{t('button.submit')}</button>
+                <Link to="/register" className="capitalize text-right">{t('login.register')}</Link>
               </div>
             </form>
           </div>

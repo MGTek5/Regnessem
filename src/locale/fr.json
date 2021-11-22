@@ -14,7 +14,8 @@
       "subtitle": "Entrez votre email et mot de passe",
       "email": "Email",
       "password": "Mot de passe",
-      "fun_boi": "J'suis rigodrole"
+      "fun_boi": "J'suis rigodrole",
+      "register": "créer un compte"
     },
     "common": {
       "error":"Il y a eu un problème"

@@ -14,7 +14,8 @@
       "subtitle": "Type your email and password",
       "email": "Email",
       "password": "Password",
-      "fun_boi": "I'm a fun boi"
+      "fun_boi": "I'm a fun boi",
+      "register":"create an account"
     },
     "common": {
       "error":"Something went wrong"
