@@ -11,6 +11,7 @@
     },
     "register": {
       "title": "Inscription",
+      "subtitle":"Créez votre compte en quelques clicks",
       "email":"Email",
       "username":"Nom utilisateur",
       "password":"Mot de passe",

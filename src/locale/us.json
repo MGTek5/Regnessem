@@ -11,6 +11,7 @@
     },
     "register": {
       "title": "Register",
+      "subtitle":"You're just a few clicks away from creating your account",
       "email":"Email",
       "username":"Username",
       "password":"Password",
