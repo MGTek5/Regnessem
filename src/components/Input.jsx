@@ -9,24 +9,24 @@ const Input = ({
   id,
   onChange,
   onBlur,
+  required,
 }) => (
-  <div>
+  <div className="form-control">
     {label && (
-      <label htmlFor={label} className="block text-sm font-medium text-white">
-        {label}
+      <label htmlFor={label} className="label">
+        <span className="label-text">{label}</span>
       </label>
     )}
-    <div className="my-1 relative rounded-md shadow-sm">
-      <input
-        type={type}
-        name={name}
-        id={id}
-        className="block w-full p-2 border-none outline-none focus:outline-none rounded-md text-gray-600"
-        placeholder={placeholder}
-        onChange={onChange}
-        onBlur={onBlur}
-      />
-    </div>
+    <input
+      required={required}
+      type={type}
+      name={name}
+      id={id}
+      className="input"
+      placeholder={placeholder}
+      onChange={onChange}
+      onBlur={onBlur}
+    />
   </div>
 );
 
@@ -38,6 +38,7 @@ Input.propTypes = {
   id: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
+  required: PropTypes.bool,
 };
 
 Input.defaultProps = {
@@ -46,6 +47,7 @@ Input.defaultProps = {
   type: 'text',
   name: '',
   id: '',
+  required: true,
   onChange: () => {},
   onBlur: () => {},
 };

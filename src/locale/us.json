@@ -15,6 +15,9 @@
       "email": "Email",
       "password": "Password",
       "fun_boi": "I'm a fun boi"
+    },
+    "common": {
+      "error":"Something went wrong"
     }
   }
 }

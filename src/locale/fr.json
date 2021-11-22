@@ -15,6 +15,9 @@
       "email": "Email",
       "password": "Mot de passe",
       "fun_boi": "J'suis rigodrole"
+    },
+    "common": {
+      "error":"Il y a eu un problème"
     }
   }
 }
