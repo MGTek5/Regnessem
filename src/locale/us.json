@@ -7,7 +7,9 @@
       "rgpd": "Legal notices"
     },
     "button": {
-      "submit": "Submit"
+      "submit": "Submit",
+      "validate": "Validate",
+      "cancel": "Cancel"
     },
     "register": {
       "title": "Register",
@@ -25,6 +27,9 @@
       "password": "Password",
       "fun_boi": "I'm a fun boi",
       "register":"create an account"
+    },
+    "home": {
+      "new": "New conversation"
     },
     "common": {
       "error":"Something went wrong"

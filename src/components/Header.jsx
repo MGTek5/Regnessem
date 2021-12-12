@@ -7,7 +7,7 @@ const Header = () => {
   const location = useLocation().pathname;
   if (NO_HEADER_ROUTES.includes(location)) return null;
   return (
-    <header className="w-full h-16 bg-black text-white flex items-center justify-between text-xl">
+    <header className="w-full h-16 bg-gray-900 text-white flex items-center justify-between text-xl">
       <div className="flex justify-evenly w-3/4">
         <Link to="/">Link 1</Link>
         <Link to="/">Link 2</Link>

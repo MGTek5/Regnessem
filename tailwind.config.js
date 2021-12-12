@@ -4,18 +4,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        yellow: {
-          DEFAULT: '#dac64e',
-          900: '#dac64ee6',
-          800: '#dac64ecc',
-          700: '#dac64eb3',
-          600: '#dac64e99',
-          500: '#dac64e80',
-          400: '#dac64e66',
-          300: '#dac64e4d',
-          200: '#dac64e33',
-          100: '#dac64e1a',
-        },
+        pupule: {
+          DEFAULT: "#570df8",
+          900: "#570df8e6",
+          800: "#570df8cc",
+          700: "#570df8b3",
+          600: "#570df899",
+          500: "#570df880",
+          400: "#570df866",
+          300: "#570df84d",
+          200: "#570df833",
+          100: "#570df81a",
+        }
       },
     },
   },
@@ -25,5 +25,7 @@ module.exports = {
   plugins: [
     // eslint-disable-next-line global-require
     require('daisyui'),
+    // eslint-disable-next-line global-require
+    require('tailwindcss-scrollbar')
   ],
 };

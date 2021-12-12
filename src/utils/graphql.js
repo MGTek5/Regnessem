@@ -26,4 +26,33 @@ const REGISTER = gql`
   }
 `;
 
-export { REGISTER, LOGIN };
+const GET_USERS = gql`
+  query {
+    getUsers {
+      _id
+      username
+      profileGif
+    }
+  }
+`;
+
+const GET_CHATS = gql`
+  query {
+    getChats {
+      _id
+      name
+      members {
+        _id
+        profileGif
+        username
+      }
+    }
+  }
+`;
+
+export {
+  REGISTER,
+  LOGIN,
+  GET_USERS,
+  GET_CHATS,
+};
