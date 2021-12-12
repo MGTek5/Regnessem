@@ -50,9 +50,24 @@ const GET_CHATS = gql`
   }
 `;
 
+const CREATE_CHAT = gql`
+  mutation ($chatCreateData: ChatCreateInput!) {
+    createChat(chatCreateData: $chatCreateData) {
+      _id
+      name
+      members {
+        _id
+        profileGif
+        username
+      }
+    }
+  }
+`;
+
 export {
   REGISTER,
   LOGIN,
   GET_USERS,
   GET_CHATS,
+  CREATE_CHAT,
 };

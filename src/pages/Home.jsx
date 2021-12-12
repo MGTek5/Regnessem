@@ -1,7 +1,8 @@
-import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { GET_USERS, GET_CHATS } from '../utils/graphql';
+import * as namez from 'namez';
+import { GET_USERS, GET_CHATS, CREATE_CHAT } from '../utils/graphql';
 import Plus from '../components/images/Plus';
 import NewChatModal from '../components/NewChatModal';
 
@@ -13,6 +14,7 @@ const Home = () => {
   const [newChatModalOpen, setNewChatModalOpen] = useState(false);
   const { data: usersData } = useQuery(GET_USERS);
   const { data: chatsData } = useQuery(GET_CHATS);
+  const [createChat] = useMutation(CREATE_CHAT);
 
   useEffect(() => {
     if (usersData) {
@@ -63,8 +65,19 @@ const Home = () => {
         isOpen={newChatModalOpen}
         closeCb={() => setNewChatModalOpen(false)}
         createCb={(selectedUsers) => {
-          // TODO create chats with selectedUsers
-          console.log(selectedUsers);
+          createChat({
+            variables: {
+              chatCreateData: {
+                name: namez({ format: 'title', separator: ' ' }),
+                members: selectedUsers,
+              },
+            },
+          }).then((res) => {
+            setChats((old) => [
+              ...old,
+              res.data.createChat,
+            ]);
+          });
           setNewChatModalOpen(false);
         }}
       />
