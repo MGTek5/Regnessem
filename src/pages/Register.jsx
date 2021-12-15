@@ -5,7 +5,6 @@ import { useMutation } from '@apollo/client';
 import { Link, useHistory } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Input from '../components/Input';
-// import Button from '../components/Button';
 import { REGISTER } from '../utils/graphql';
 
 const Register = () => {
