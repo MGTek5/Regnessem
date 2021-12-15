@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Proptypes from 'prop-types';
+import UserModel from '../types/user';
 
 const NewChatModal = ({
   users,
@@ -71,8 +72,7 @@ const NewChatModal = ({
 };
 
 NewChatModal.propTypes = {
-  // TODO define a type for users
-  users: Proptypes.array.isRequired, // eslint-disable-line
+  users: Proptypes.arrayOf(UserModel).isRequired,
   isOpen: Proptypes.bool.isRequired,
   closeCb: Proptypes.func.isRequired,
   createCb: Proptypes.func.isRequired,
