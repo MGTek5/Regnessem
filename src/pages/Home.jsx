@@ -5,6 +5,7 @@ import * as namez from 'namez';
 import { GET_USERS, GET_CHATS, CREATE_CHAT } from '../utils/graphql';
 import Plus from '../components/images/Plus';
 import NewChatModal from '../components/NewChatModal';
+import Picto from '../components/Picto';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -28,12 +29,6 @@ const Home = () => {
     }
   }, [usersData, chatsData, selectedChat]);
 
-  const getChatIcon = (chat) => (
-    // TODO pick the first picture that don't belong to the connected user
-    // TODO use defaultPic.jpeg as default
-    chat.members[0].profileGif
-  );
-
   return (
     <div className="flex h-full bg-gray-800">
       <div className="w-1/5 flex flex-col shadow-md">
@@ -50,12 +45,8 @@ const Home = () => {
             key={chat._id}
             onClick={() => setSelectedChat(chat._id)}
           >
-            <img
-              alt="chat picto"
-              src={getChatIcon(chat)}
-              className="h-12 w-12 rounded-full mr-3"
-            />
-            <span>{chat.name}</span>
+            <Picto members={chat.members} />
+            <span className="ml-3">{chat.name}</span>
           </button>
         ))}
       </div>
