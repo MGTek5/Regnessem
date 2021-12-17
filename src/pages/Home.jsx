@@ -31,6 +31,9 @@ const Home = () => {
 
   return (
     <div className="flex h-full bg-gray-800">
+      <div className="w-4/5">
+        <div className="w-full h-full text-center items-center justify-center flex flex-col" />
+      </div>
       <div className="w-1/5 flex flex-col shadow-md">
         <div className="flex w-full p-4 border-b items-center justify-between">
           <span className="flex items-center font-bold">{t('home.new')}</span>
@@ -38,19 +41,21 @@ const Home = () => {
             <Plus className="w-4 h-4" />
           </button>
         </div>
-        {chats.map((chat) => (
-          <button
-            type="button"
-            className={'flex items-center pl-2 py-2 text-white outline-none rounded-xl m-1 focus:outline-none '.concat(selectedChat === chat._id ? 'bg-pupule-900' : 'hover:bg-pupule-400')}
-            key={chat._id}
-            onClick={() => setSelectedChat(chat._id)}
-          >
-            <Picto members={chat.members} />
-            <span className="ml-3">{chat.name}</span>
-          </button>
-        ))}
+        <div className="pr-3  overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray">
+          {chats.map((chat) => (
+            <button
+              type="button"
+              className={'flex items-center pl-2 py-2 w-full text-white outline-none rounded-xl m-1 focus:outline-none '.concat(selectedChat === chat._id ? 'bg-pupule-900' : 'hover:bg-pupule-400')}
+              key={chat._id}
+              onClick={() => setSelectedChat(chat._id)}
+            >
+              <Picto members={chat.members} />
+              <span className="ml-3">{chat.name}</span>
+            </button>
+          ))}
+
+        </div>
       </div>
-      <div className="w-4/5">eza</div>
       <NewChatModal
         users={users}
         isOpen={newChatModalOpen}

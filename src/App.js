@@ -14,7 +14,7 @@ const App = () => (
       <ApolloProvider client={client}>
         <Toaster />
         <Header />
-        <main>
+        <main className="overflow-hidden">
           <Page>
             <Router />
           </Page>
