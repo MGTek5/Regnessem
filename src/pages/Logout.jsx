@@ -10,7 +10,7 @@ const Logout = () => {
         localStorage.removeItem('regnessem-token');
         localStorage.removeItem('regnessem-user');
         history.push('/login');
-      }, 2000);
+      }, 2500);
     }
   }, [history]);
 

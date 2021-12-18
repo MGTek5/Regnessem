@@ -61,7 +61,7 @@ const NewChatModal = ({
             className="btn btn-primary p-4 py-2 hover:underline disabled:btn-disabled"
             type="button"
             onClick={() => createCb(selectedUsers)}
-            disabled={!selectedUsers.length}
+            disabled={selectedUsers.length <= 1}
           >
             {t('button.validate')}
           </button>
