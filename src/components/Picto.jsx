@@ -23,6 +23,7 @@ const Picto = ({
         <img
           alt=""
           src={user.profileGif || DEFAULT_PIC}
+          key={user.profileGif || `${Math.random()}-random-id-picto`}
           className={`absolute ${getOpacityClass()} h-full w-full top-0 left-0 rounded-full`}
         />
       ))}

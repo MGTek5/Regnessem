@@ -3,5 +3,12 @@ const BASE_URL = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
   : 'https://theProdUrl.com';
 
 const BASE_WS = BASE_URL.replace(/^http/, 'ws');
+const TENOR_API_BASE_URL = 'https://g.tenor.com/v1';
+const TENOR_API_KEY = 'EEDC1C0HTAYG';
 
-export { BASE_URL, BASE_WS };
+export {
+  BASE_URL,
+  BASE_WS,
+  TENOR_API_KEY,
+  TENOR_API_BASE_URL,
+};

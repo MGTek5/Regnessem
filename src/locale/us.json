@@ -29,7 +29,10 @@
       "register":"create an account"
     },
     "home": {
-      "new": "New conversation"
+      "new": "New conversation",
+      "searchBar": "Search a GIF",
+      "nothingToShow": "Nothing to show here",
+      "searchSomething": "Try to type somthing..."
     },
     "common": {
       "error":"Something went wrong"

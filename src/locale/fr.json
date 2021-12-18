@@ -29,7 +29,10 @@
       "register": "créer un compte"
     },
     "home": {
-      "new": "Nouvelle conversation"
+      "new": "Nouvelle conversation",
+      "searchBar": "Rechercher un GIF",
+      "nothingToShow": "Il n'a y a rien a voir ici",
+      "searchSomething": "Essayer de rechercher quelque chose..."
     },
     "common": {
       "error":"Il y a eu un problème"
