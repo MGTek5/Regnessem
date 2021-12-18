@@ -53,7 +53,7 @@ const Home = () => {
   }, [gifFilter]); // eslint-disable-line
 
   return (
-    <div className="flex h-full bg-gray-800">
+    <div className="flex h-full">
       <div className="w-4/5">
         <div className="w-full h-full flex">
           <div className="flex flex-col items-center justify-between shadow-md w-96 h-full">
@@ -105,7 +105,6 @@ const Home = () => {
               <span className="ml-3">{chat.name}</span>
             </button>
           ))}
-
         </div>
       </div>
       <NewChatModal

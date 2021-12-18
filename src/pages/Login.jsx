@@ -63,7 +63,7 @@ const Login = () => {
                   <input type="checkbox" onChange={() => setIsAFunBoi((old) => !old)} checked={isAFunBoi} className="checkbox checkbox-primary" />
                 </div>
                 <button type="submit" className="btn btn-primary">{t('button.submit')}</button>
-                <Link to="/register" className="capitalize text-right">{t('login.register')}</Link>
+                <Link to="/register" className="capitalize text-right hover:underline">{t('login.register')}</Link>
               </div>
             </form>
           </div>
