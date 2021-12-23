@@ -11,7 +11,6 @@ const Message = ({
   useEffect(() => {
     // TODO set to true if message.auth._id match connected user
     setFromConnectedUser(!!Math.round(Math.random()) % 2);
-    console.log(fromConnectedUser);
   }, []); // eslint-disable-line
 
   const getContainerStyle = () => {
@@ -45,7 +44,7 @@ const Message = ({
       <div className={getMessageStyle()}>
         <img alt={message._id} src={message.message} className="w-full" />
       </div>
-      <Picto className="h-6 w-6 mb-3 relative" members={[message.author]} />
+      <Picto className="h-6 w-6 mb-4 relative" members={[message.author]} />
     </div>
   );
 };
