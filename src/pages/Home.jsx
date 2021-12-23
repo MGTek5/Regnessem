@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery, useMutation, useSubscription } from '@apollo/client';
+import {
+  useQuery,
+  useMutation,
+  useSubscription,
+  useLazyQuery,
+} from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import * as namez from 'namez';
 import toast from 'react-hot-toast';
@@ -8,12 +13,15 @@ import Plus from '../components/images/Plus';
 import NewChatModal from '../components/NewChatModal';
 import Picto from '../components/Picto';
 import Search from '../components/images/Search';
+import Message from '../components/Message';
 import { TENOR_API_BASE_URL, TENOR_API_KEY } from '../constant';
 import {
   GET_USERS,
   GET_CHATS,
   CREATE_CHAT,
   CHAT_CREATED,
+  GET_MESSAGES,
+  MESSAGE_CREATED,
 } from '../utils/graphql';
 
 const Home = () => {
@@ -21,6 +29,7 @@ const Home = () => {
   const [users, setUsers] = useState([]);
   const [chats, setChats] = useState([]);
   const [gifs, setGifs] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [gifFilter, setGifFilter] = useState(undefined);
   const [selectedChat, setSelectedChat] = useState(null);
   const [newChatModalOpen, setNewChatModalOpen] = useState(false);
@@ -28,19 +37,7 @@ const Home = () => {
   const { data: chatsData } = useQuery(GET_CHATS);
   const [createChat] = useMutation(CREATE_CHAT);
   const { error: chatCreatedError, data: chatCreatedData } = useSubscription(CHAT_CREATED);
-
-  useEffect(() => {
-    if (chatCreatedData) {
-      // TODO play sound
-      const newChat = chatCreatedData.chatCreated;
-      setChats((old) => [newChat, ...old]);
-      return;
-    }
-    if (chatCreatedError) {
-      toast.error(t('common.error'));
-    }
-  }, [chatCreatedData, chatCreatedError]); // eslint-disable-line
-
+  const { error: messageCreatedError, data: messageCreatedData } = useSubscription(MESSAGE_CREATED);
   const fetchGifs = async () => {
     try {
       const res = await axios.get(`${TENOR_API_BASE_URL}/search?key=${TENOR_API_KEY}&q=${gifFilter}`);
@@ -50,6 +47,48 @@ const Home = () => {
       toast.error(t('common.error'));
     }
   };
+  const [
+    fetchMessages, {
+      data: messagesData,
+      error: messagesError,
+    },
+  ] = useLazyQuery(GET_MESSAGES, {
+    variables: {
+      chatId: selectedChat,
+    },
+  });
+
+  const scrollToBottom = () => {
+    const chat = document.getElementById('chat');
+    chat.scrollTop = chat.scrollHeight;
+  };
+
+  useEffect(() => {
+    if (chatCreatedData) {
+      // TODO play sound if not created by connected user (members[0]._id)
+      const newChat = chatCreatedData.chatCreated;
+      setChats((old) => [newChat, ...old]);
+      return;
+    }
+    if (chatCreatedError) {
+      toast.error(t('common.error'));
+    }
+  }, [chatCreatedData, chatCreatedError]); // eslint-disable-line
+
+  useEffect(() => {
+    if (messageCreatedData) {
+      const message = messageCreatedData.messageCreated;
+      if (selectedChat === message.chat._id) {
+        setMessages((old) => [...old, message]);
+      } else {
+        // TODO: play sound
+        // TODO: move conversation to the top
+      }
+    }
+    if (messageCreatedError) {
+      toast.error(t('common.error'));
+    }
+  }, [messageCreatedError, messageCreatedData]); // eslint-disable-line
 
   useEffect(() => {
     if (usersData) {
@@ -57,11 +96,27 @@ const Home = () => {
     }
     if (chatsData) {
       setChats(chatsData.getChats);
-      if (selectedChat === null) {
+      if (!selectedChat) {
         setSelectedChat(chatsData.getChats[0]._id);
       }
     }
   }, [usersData, chatsData, selectedChat]);
+
+  useEffect(() => {
+    setMessages([]);
+    if (selectedChat) {
+      fetchMessages();
+      if (messagesError) {
+        toast.error(t('common.error'));
+      }
+    }
+  }, [selectedChat]); // eslint-disable-line
+
+  useEffect(() => {
+    if (messagesData) {
+      setMessages(messagesData.getMessages);
+    }
+  }, [messagesData]);
 
   useEffect(() => {
     setGifs([]);
@@ -69,6 +124,10 @@ const Home = () => {
       fetchGifs();
     }
   }, [gifFilter]); // eslint-disable-line
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]); // eslint-disable-line
 
   return (
     <div className="flex h-full">
@@ -85,8 +144,7 @@ const Home = () => {
                     {/* eslint-disable-next-line react/self-closing-comp */}
                     <span>{t('home.searchSomething')}</span>
                   </div>
-                )
-                : (
+                ) : (
                   <div className="max-h-full overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-wrap">
                     {gifs.map((gif) => (
                       <button type="button" className="w-1/2">
@@ -101,7 +159,11 @@ const Home = () => {
               <input className="input h-10 w-full m-2 ml-4" placeholder={t('home.searchBar')} onChange={(e) => setGifFilter(e.target.value)} />
             </div>
           </div>
-          <div className="w-full h-full text-9xl">chat</div>
+          <div id="chat" className="w-full h-full pb-3 overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-col">
+            {/* TODO make this scrollable */}
+            {/* TODO scroll bottom on load */}
+            {messages.map((message) => <Message key={message._id} message={message} />)}
+          </div>
         </div>
       </div>
       <div className="w-1/5 flex flex-col shadow-md">

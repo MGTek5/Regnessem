@@ -4,6 +4,7 @@ import UserModel from '../types/user';
 
 const Picto = ({
   members,
+  className,
 }) => {
   const DEFAULT_PIC = '/defaultPic.jpeg';
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -18,7 +19,7 @@ const Picto = ({
   );
 
   return (
-    <div className="relative h-12 w-12">
+    <div className={className}>
       {filteredUsers.map((user) => (
         <img
           alt=""
@@ -33,8 +34,11 @@ const Picto = ({
 
 Picto.propTypes = {
   members: Proptypes.arrayOf(UserModel).isRequired,
+  className: Proptypes.string,
 };
 
-Picto.defaultProps = {};
+Picto.defaultProps = {
+  className: 'relative h-12 w-12',
+};
 
 export default Picto;

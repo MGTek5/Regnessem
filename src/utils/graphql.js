@@ -78,6 +78,37 @@ const CHAT_CREATED = gql`
   }
 `;
 
+const GET_MESSAGES = gql`
+  query ($chatId: String!) {
+    getMessages(chatId: $chatId) {
+      _id
+      message
+      author {
+        _id
+        username
+        profileGif
+      }
+    }
+  }
+`;
+
+const MESSAGE_CREATED = gql`
+  subscription {
+    messageCreated {
+      _id
+      chat {
+        _id
+      }
+      message
+      author {
+        _id
+        username
+        profileGif
+      }
+    }
+  }
+`;
+
 export {
   REGISTER,
   LOGIN,
@@ -85,4 +116,6 @@ export {
   GET_CHATS,
   CREATE_CHAT,
   CHAT_CREATED,
+  GET_MESSAGES,
+  MESSAGE_CREATED,
 };
