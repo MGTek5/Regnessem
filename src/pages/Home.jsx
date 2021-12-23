@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation, useSubscription } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import * as namez from 'namez';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { GET_USERS, GET_CHATS, CREATE_CHAT } from '../utils/graphql';
 import Plus from '../components/images/Plus';
 import NewChatModal from '../components/NewChatModal';
 import Picto from '../components/Picto';
 import Search from '../components/images/Search';
 import { TENOR_API_BASE_URL, TENOR_API_KEY } from '../constant';
+import {
+  GET_USERS,
+  GET_CHATS,
+  CREATE_CHAT,
+  CHAT_CREATED,
+} from '../utils/graphql';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -22,6 +27,19 @@ const Home = () => {
   const { data: usersData } = useQuery(GET_USERS);
   const { data: chatsData } = useQuery(GET_CHATS);
   const [createChat] = useMutation(CREATE_CHAT);
+  const { error: chatCreatedError, data: chatCreatedData } = useSubscription(CHAT_CREATED);
+
+  useEffect(() => {
+    if (chatCreatedData) {
+      // TODO play sound
+      const newChat = chatCreatedData.chatCreated;
+      setChats((old) => [newChat, ...old]);
+      return;
+    }
+    if (chatCreatedError) {
+      toast.error(t('common.error'));
+    }
+  }, [chatCreatedData, chatCreatedError]); // eslint-disable-line
 
   const fetchGifs = async () => {
     try {
@@ -119,11 +137,6 @@ const Home = () => {
                 members: selectedUsers,
               },
             },
-          }).then((res) => {
-            setChats((old) => [
-              ...old,
-              res.data.createChat,
-            ]);
           });
           setNewChatModalOpen(false);
         }}

@@ -29,9 +29,7 @@ const wsLink = new WebSocketLink({
   options: {
     reconnect: true,
     connectionParams: {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('regnessem-token')}`,
-      },
+      authorization: `Bearer ${localStorage.getItem('regnessem-token')}`,
     },
   },
 });

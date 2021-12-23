@@ -25,14 +25,14 @@
       "subtitle": "Type your email and password",
       "email": "Email",
       "password": "Password",
-      "fun_boi": "I'm a fun boi",
+      "fun_boi": "I'm fun",
       "register":"create an account"
     },
     "home": {
       "new": "New conversation",
       "searchBar": "Search a GIF",
       "nothingToShow": "Nothing to show here",
-      "searchSomething": "Try to type somthing..."
+      "searchSomething": "Try to type something..."
     },
     "common": {
       "error":"Something went wrong"

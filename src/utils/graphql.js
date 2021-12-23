@@ -64,10 +64,25 @@ const CREATE_CHAT = gql`
   }
 `;
 
+const CHAT_CREATED = gql`
+  subscription {
+    chatCreated {
+      _id
+      name
+      members {
+        _id
+        username
+        profileGif
+      }
+    }
+  }
+`;
+
 export {
   REGISTER,
   LOGIN,
   GET_USERS,
   GET_CHATS,
   CREATE_CHAT,
+  CHAT_CREATED,
 };
