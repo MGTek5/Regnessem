@@ -160,8 +160,6 @@ const Home = () => {
             </div>
           </div>
           <div id="chat" className="w-full h-full pb-3 overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-col">
-            {/* TODO make this scrollable */}
-            {/* TODO scroll bottom on load */}
             {messages.map((message) => <Message key={message._id} message={message} />)}
           </div>
         </div>
