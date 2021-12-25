@@ -22,7 +22,9 @@ import {
   CHAT_CREATED,
   GET_MESSAGES,
   MESSAGE_CREATED,
+  CREATE_MESSAGE,
 } from '../utils/graphql';
+import Sad from '../components/images/Sad';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -36,6 +38,7 @@ const Home = () => {
   const { data: usersData } = useQuery(GET_USERS);
   const { data: chatsData } = useQuery(GET_CHATS);
   const [createChat] = useMutation(CREATE_CHAT);
+  const [createMessage] = useMutation(CREATE_MESSAGE);
   const { error: chatCreatedError, data: chatCreatedData } = useSubscription(CHAT_CREATED);
   const { error: messageCreatedError, data: messageCreatedData } = useSubscription(MESSAGE_CREATED);
   const fetchGifs = async () => {
@@ -57,10 +60,20 @@ const Home = () => {
       chatId: selectedChat,
     },
   });
-
   const scrollToBottom = () => {
     const chat = document.getElementById('chat');
     chat.scrollTop = chat.scrollHeight;
+  };
+  const sendMessage = (content) => {
+    createMessage({
+      variables: {
+        messageCreateData: {
+          chat: selectedChat,
+          author: 'id', // TODO use user id
+          message: content,
+        },
+      },
+    });
   };
 
   useEffect(() => {
@@ -147,7 +160,7 @@ const Home = () => {
                 ) : (
                   <div className="max-h-full overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-wrap">
                     {gifs.map((gif) => (
-                      <button type="button" className="w-1/2">
+                      <button type="button" className="w-1/2" onClick={() => sendMessage(gif.media[0].gif.url)}>
                         <img className="w-48 h-48" alt={gif.id} src={gif.media[0].gif.url} key={gif.id} />
                       </button>
                     ))}
@@ -160,7 +173,16 @@ const Home = () => {
             </div>
           </div>
           <div id="chat" className="w-full h-full pb-3 overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-col">
-            {messages.map((message) => <Message key={message._id} message={message} />)}
+            {!messages.length
+              ? (
+                <div className="h-full w-full flex flex-col items-center justify-center">
+                  <h2 className="text-2xl">{t('home.nothingToShow')}</h2>
+                  <h3 className="text-l">{t('home.sendMessage')}</h3>
+                  <Sad className="h-24 mt-8" />
+                </div>
+              ) : (
+                messages.map((message) => <Message key={message._id} message={message} />)
+              )}
           </div>
         </div>
       </div>

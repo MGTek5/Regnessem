@@ -32,7 +32,8 @@
       "new": "Nouvelle conversation",
       "searchBar": "Rechercher un GIF",
       "nothingToShow": "Il n'a y a rien a voir ici",
-      "searchSomething": "Essayer de rechercher quelque chose..."
+      "searchSomething": "Essayer de rechercher quelque chose...",
+      "sendMessage": "Envoyer un GIF pour lancer la conversation"
     },
     "common": {
       "error":"Il y a eu un problème"

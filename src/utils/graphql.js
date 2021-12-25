@@ -109,6 +109,14 @@ const MESSAGE_CREATED = gql`
   }
 `;
 
+const CREATE_MESSAGE = gql`
+  mutation($messageCreateData: MessageCreateInput!) {
+    createMessage(messageCreateData: $messageCreateData) {
+      _id
+    }
+  }
+`;
+
 export {
   REGISTER,
   LOGIN,
@@ -118,4 +126,5 @@ export {
   CHAT_CREATED,
   GET_MESSAGES,
   MESSAGE_CREATED,
+  CREATE_MESSAGE,
 };
