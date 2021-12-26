@@ -34,28 +34,30 @@ const NewChatModal = ({
           onChange={(e) => setUserFilter(e.target.value)}
         />
         <div className="w-full max-h-96 overflow-y-auto overflow-x-hidden scrollbar-w-2 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray">
-          {users.filter((user) => user.username.includes(userFilter) && user._id !== userContext?.user?._id).map((user) => ( // eslint-disable-line
-            <button
-              type="button"
-              className={'flex items-center pl-2 py-2 text-white outline-none rounded-xl m-1 mr-4 focus:outline-none hover:bg-pupule-600 w-full '.concat(selectedUsers.includes(user._id) ? 'bg-purple-900' : '')}
-              onClick={() => {
-                setSelectedUsers((old) => {
-                  if (old.includes(user._id)) {
-                    return old.filter((id) => id !== user._id);
-                  }
-                  return [...old, user._id];
-                });
-              }}
-              key={user._id}
-            >
-              <img
-                alt="chat picto"
-                src={user.profileGif || '/defaultPic.jpeg'}
-                className="h-12 w-12 rounded-full mr-3"
-              />
-              <span>{user.username}</span>
-            </button>
-          ))}
+          {users.filter((user) => user.username.includes(userFilter)
+              && user._id !== userContext?.user?._id)
+            .map((user) => (
+              <button
+                type="button"
+                className={'flex items-center pl-2 py-2 text-white outline-none rounded-xl m-1 mr-4 focus:outline-none hover:bg-pupule-600 w-full '.concat(selectedUsers.includes(user._id) ? 'bg-purple-900' : '')}
+                onClick={() => {
+                  setSelectedUsers((old) => {
+                    if (old.includes(user._id)) {
+                      return old.filter((id) => id !== user._id);
+                    }
+                    return [...old, user._id];
+                  });
+                }}
+                key={user._id}
+              >
+                <img
+                  alt="chat picto"
+                  src={user.profileGif || '/defaultPic.jpeg'}
+                  className="h-12 w-12 rounded-full mr-3"
+                />
+                <span>{user.username}</span>
+              </button>
+            ))}
         </div>
         <div className="modal-action">
           <button
