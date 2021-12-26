@@ -66,8 +66,14 @@ const Home = () => {
     const chat = document.getElementById('chat');
     chat.scrollTop = chat.scrollHeight;
   };
+  const clearGifSearchBarInput = () => {
+    const input = document.getElementById('gif-search');
+    input.value = '';
+    setGifs([]);
+    setGifFilter('');
+  };
   const sendMessage = (content) => {
-    // TODO clear search bar value
+    clearGifSearchBarInput();
     createMessage({
       variables: {
         messageCreateData: {
@@ -163,8 +169,8 @@ const Home = () => {
                 ) : (
                   <div className="max-h-full overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-wrap">
                     {gifs.map((gif) => (
-                      <button type="button" className="w-1/2" onClick={() => sendMessage(gif.media[0].gif.url)}>
-                        <img className="w-48 h-48" alt={gif.id} src={gif.media[0].gif.url} key={gif.id} />
+                      <button key={gif.id} type="button" className="w-1/2" onClick={() => sendMessage(gif.media[0].gif.url)}>
+                        <img className="w-48 h-48" alt={gif.id} src={gif.media[0].gif.url} />
                       </button>
                     ))}
                   </div>
@@ -172,7 +178,7 @@ const Home = () => {
             }
             <div className="flex items-center">
               <Search className="h-6 w-6" />
-              <input className="input h-10 w-full m-2 ml-4" placeholder={t('home.searchBar')} onChange={(e) => setGifFilter(e.target.value)} />
+              <input id="gif-search" className="input h-10 w-full m-2 ml-4" placeholder={t('home.searchBar')} onChange={(e) => setGifFilter(e.target.value)} />
             </div>
           </div>
           <div id="chat" className="w-full h-full pb-3 overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-col">
