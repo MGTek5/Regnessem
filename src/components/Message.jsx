@@ -12,7 +12,7 @@ const Message = ({
 
   useEffect(() => {
     setFromConnectedUser(message.author._id === userContext.user._id);
-  }, []); // eslint-disable-line
+  }, [userContext.user._id, message.author._id]);
 
   const getContainerStyle = () => {
     const common = 'flex items-end p-2 justify-end';

@@ -149,7 +149,7 @@ const Home = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]); // eslint-disable-line
+  }, [messages]);
 
   return (
     <div className="flex h-full">
