@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   useQuery,
   useMutation,
@@ -25,6 +25,7 @@ import {
   CREATE_MESSAGE,
 } from '../utils/graphql';
 import Sad from '../components/images/Sad';
+import UserContext from '../contexts/user.context';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -41,6 +42,7 @@ const Home = () => {
   const [createMessage] = useMutation(CREATE_MESSAGE);
   const { error: chatCreatedError, data: chatCreatedData } = useSubscription(CHAT_CREATED);
   const { error: messageCreatedError, data: messageCreatedData } = useSubscription(MESSAGE_CREATED);
+  const userContext = useContext(UserContext);
   const fetchGifs = async () => {
     try {
       const res = await axios.get(`${TENOR_API_BASE_URL}/search?key=${TENOR_API_KEY}&q=${gifFilter}`);
@@ -65,11 +67,12 @@ const Home = () => {
     chat.scrollTop = chat.scrollHeight;
   };
   const sendMessage = (content) => {
+    // TODO clear search bar value
     createMessage({
       variables: {
         messageCreateData: {
           chat: selectedChat,
-          author: 'id', // TODO use user id
+          author: userContext.user._id,
           message: content,
         },
       },
