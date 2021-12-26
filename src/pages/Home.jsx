@@ -196,10 +196,10 @@ const Home = () => {
         </div>
       </div>
       <div className="w-1/5 flex flex-col shadow-md">
-        <div className="flex w-full p-4 border-b items-center justify-between">
-          <span className="flex items-center font-bold">{t('home.new')}</span>
-          <button type="button" className="bg-pupule outline-none p-1 rounded-full" onClick={() => setNewChatModalOpen(true)}>
-            <Plus className="w-4 h-4" />
+        <div className="flex w-full p-4 border-b items-center">
+          <button type="button" className="outline-none p-1 flex items-center justify-between w-full" onClick={() => setNewChatModalOpen(true)}>
+            <span className="flex items-center font-bold">{t('home.new')}</span>
+            <Plus className="w-6 h-6 bg-pupule rounded-full p-1" />
           </button>
         </div>
         <div className="pr-3 overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray">

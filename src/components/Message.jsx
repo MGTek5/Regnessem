@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import MessageModel from '../types/message';
 import Picto from './Picto';
 import UserContext from '../contexts/user.context';
@@ -51,7 +51,7 @@ const Message = ({
 };
 
 Message.propTypes = {
-  message: PropTypes.instanceOf(MessageModel).isRequired,
+  message: MessageModel.isRequired,
 };
 
 Message.defaultProps = {};

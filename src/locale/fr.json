@@ -1,7 +1,9 @@
 {
   "translation": {
     "header": {
-      "home": "Acceuil"
+      "settings": "Paramètres",
+      "profile": "Profil",
+      "signOut": "Déconnexion"
     },
     "footer": {
       "rgpd": "Mentions légales"
