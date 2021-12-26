@@ -29,7 +29,7 @@ const NewChatModal = ({
         <h2 className="text-center font-bold mb-2 pb-2 border-b border-purple-500">{t('home.new')}</h2>
         <input
           type="text"
-          placeholder="Search by username"
+          placeholder={t('chatCreationForm.search')}
           className="input input-primary input-bordered target:outline-none outline-none w-full mb-4 mt-1"
           onChange={(e) => setUserFilter(e.target.value)}
         />

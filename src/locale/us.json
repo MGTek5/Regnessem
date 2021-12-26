@@ -13,11 +13,11 @@
     },
     "register": {
       "title": "Register",
-      "subtitle":"You're just a few clicks away from creating your account",
-      "email":"Email",
-      "username":"Username",
-      "password":"Password",
-      "login":"sign in",
+      "subtitle": "You're just a few clicks away from creating your account",
+      "email": "Email",
+      "username": "Username",
+      "password": "Password",
+      "login": "sign in",
       "fun_boi": "I'm a fun boi"
     },
     "login": {
@@ -26,7 +26,7 @@
       "email": "Email",
       "password": "Password",
       "fun_boi": "I'm fun",
-      "register":"create an account"
+      "register": "create an account"
     },
     "home": {
       "new": "New conversation",
@@ -35,8 +35,11 @@
       "searchSomething": "Try to type something...",
       "sendMessage": "Send a GIF to start the conversation"
     },
+    "chatCreationForm": {
+      "search": "Search by username"
+    },
     "common": {
-      "error":"Something went wrong"
+      "error": "Something went wrong"
     }
   }
 }

@@ -13,11 +13,11 @@
     },
     "register": {
       "title": "Inscription",
-      "subtitle":"Créez votre compte en quelques clicks",
-      "email":"Email",
-      "username":"Nom utilisateur",
-      "password":"Mot de passe",
-      "login":"se connecter",
+      "subtitle": "Créez votre compte en quelques clicks",
+      "email": "Email",
+      "username": "Nom utilisateur",
+      "password": "Mot de passe",
+      "login": "se connecter",
       "fun_boi": "J'suis fun"
     },
     "login": {
@@ -35,8 +35,11 @@
       "searchSomething": "Essayer de rechercher quelque chose...",
       "sendMessage": "Envoyer un GIF pour lancer la conversation"
     },
+    "chatCreationForm": {
+      "search": "Chercher par nom d'utilisateur"
+    },
     "common": {
-      "error":"Il y a eu un problème"
+      "error": "Il y a eu un problème"
     }
   }
 }
