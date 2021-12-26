@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Proptypes from 'prop-types';
 import UserModel from '../types/user';
+import UserContext from '../contexts/user.context';
 
 const NewChatModal = ({
   users,
@@ -11,8 +12,16 @@ const NewChatModal = ({
 }) => {
   const [t] = useTranslation();
   const [userFilter, setUserFilter] = useState('');
-  // TODO include connected user
+  const userContext = useContext(UserContext);
   const [selectedUsers, setSelectedUsers] = useState([]);
+
+  useEffect(() => {
+    if (userContext.user) {
+      if (!selectedUsers.includes(userContext.user._id)) {
+        setSelectedUsers((old) => [userContext.user._id, ...old]);
+      }
+    }
+  }, [userContext]); // eslint-disable-line
 
   return (
     <div className={'modal '.concat(isOpen ? 'modal-open' : '')}>
@@ -25,8 +34,7 @@ const NewChatModal = ({
           onChange={(e) => setUserFilter(e.target.value)}
         />
         <div className="w-full max-h-96 overflow-y-auto overflow-x-hidden scrollbar-w-2 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray">
-          {/* TODO exclude current user from list */}
-          {users.filter((user) => user.username.includes(userFilter)).map((user) => (
+          {users.filter((user) => user.username.includes(userFilter) && user._id !== userContext?.user?._id).map((user) => ( // eslint-disable-line
             <button
               type="button"
               className={'flex items-center pl-2 py-2 text-white outline-none rounded-xl m-1 mr-4 focus:outline-none hover:bg-pupule-600 w-full '.concat(selectedUsers.includes(user._id) ? 'bg-purple-900' : '')}

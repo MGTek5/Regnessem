@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MessageModel from '../types/message';
 import Picto from './Picto';
+import UserContext from '../contexts/user.context';
 
 const Message = ({
   message,
 }) => {
-  const [fromConnectedUser, setFromConnectedUser] = useState(true);
+  const [fromConnectedUser, setFromConnectedUser] = useState(false);
+  const userContext = useContext(UserContext);
 
   useEffect(() => {
-    // TODO set to true if message.auth._id match connected user
-    setFromConnectedUser(!!Math.round(Math.random()) % 2);
+    setFromConnectedUser(message.author._id === userContext.user._id);
   }, []); // eslint-disable-line
 
   const getContainerStyle = () => {

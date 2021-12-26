@@ -10,7 +10,6 @@ const Picto = ({
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
-    // TODO exclude connected user and randomize array
     setFilteredUsers(members);
   }, [members]);
 
