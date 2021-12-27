@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Proptypes from 'prop-types';
 import UserModel from '../types/user';
 import UserContext from '../contexts/user.context';
+import Input from './Input';
 
 const NewChatModal = ({
   users,
@@ -27,7 +28,8 @@ const NewChatModal = ({
     <div className={'modal '.concat(isOpen ? 'modal-open' : '')}>
       <div className="modal-box">
         <h2 className="text-center font-bold mb-2 pb-2 border-b border-purple-500">{t('home.new')}</h2>
-        <input
+        <Input
+          label={t('chatCreationForm.username')}
           type="text"
           placeholder={t('chatCreationForm.search')}
           className="input input-primary input-bordered target:outline-none outline-none w-full mb-4 mt-1"

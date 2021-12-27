@@ -13,12 +13,12 @@ Builds the app for production to the `dist` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 ### `npm run lint`
-Lookup every single files and generate (or not) a detailled repport of errors.
+Inspects every single file and generates (maybe) a detailed report of all found errors.
 Should return 0 before every single push and run in CI.
 Should respect [AirBnb style guide](https://github.com/airbnb/javascript).
 
 ### `npm run lint:fix`
-Basically like `npm run lint` but it will try to solve your mistakes.
+Basically like `npm run lint` but it will try to fix your mistakes.
 
 ## Start guide
 After starting the [backend](https://github.com/mgtek5/regneback) just run:

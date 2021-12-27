@@ -38,7 +38,8 @@
       "sendMessage": "Send a GIF to start the conversation"
     },
     "chatCreationForm": {
-      "search": "Search by username"
+      "search": "Search by username",
+      "username": "Username"
     },
     "common": {
       "error": "Something went wrong"

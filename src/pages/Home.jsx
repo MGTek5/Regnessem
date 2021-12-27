@@ -43,15 +43,6 @@ const Home = () => {
   const { error: chatCreatedError, data: chatCreatedData } = useSubscription(CHAT_CREATED);
   const { error: messageCreatedError, data: messageCreatedData } = useSubscription(MESSAGE_CREATED);
   const userContext = useContext(UserContext);
-  const fetchGifs = async () => {
-    try {
-      const res = await axios.get(`${TENOR_API_BASE_URL}/search?key=${TENOR_API_KEY}&q=${gifFilter}`);
-      const d = res.data.results;
-      setGifs(d);
-    } catch (err) {
-      toast.error(t('common.error'));
-    }
-  };
   const [
     fetchMessages, {
       data: messagesData,
@@ -95,7 +86,7 @@ const Home = () => {
     if (chatCreatedError) {
       toast.error(t('common.error'));
     }
-  }, [chatCreatedData, chatCreatedError]); // eslint-disable-line
+  }, [chatCreatedData, chatCreatedError, t]);
 
   useEffect(() => {
     if (messageCreatedData) {
@@ -110,7 +101,7 @@ const Home = () => {
     if (messageCreatedError) {
       toast.error(t('common.error'));
     }
-  }, [messageCreatedError, messageCreatedData]); // eslint-disable-line
+  }, [messageCreatedError, messageCreatedData, t, selectedChat]);
 
   useEffect(() => {
     if (usersData) {
@@ -132,7 +123,7 @@ const Home = () => {
         toast.error(t('common.error'));
       }
     }
-  }, [selectedChat]); // eslint-disable-line
+  }, [selectedChat, t, fetchMessages, messagesError]);
 
   useEffect(() => {
     if (messagesData) {
@@ -141,11 +132,20 @@ const Home = () => {
   }, [messagesData]);
 
   useEffect(() => {
+    const fetchGifs = async () => {
+      try {
+        const res = await axios.get(`${TENOR_API_BASE_URL}/search?key=${TENOR_API_KEY}&q=${gifFilter}`);
+        setGifs(res.data.results);
+      } catch (err) {
+        toast.error(t('common.error'));
+      }
+    };
+
     setGifs([]);
     if (gifFilter && gifFilter.length >= 3) {
       fetchGifs();
     }
-  }, [gifFilter]); // eslint-disable-line
+  }, [gifFilter, t]);
 
   useEffect(() => {
     scrollToBottom();

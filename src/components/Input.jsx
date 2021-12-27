@@ -7,6 +7,7 @@ const Input = ({
   type,
   name,
   id,
+  className,
   onChange,
   onBlur,
   required,
@@ -22,7 +23,7 @@ const Input = ({
       type={type}
       name={name}
       id={id}
-      className="input"
+      className={className}
       placeholder={placeholder}
       onChange={onChange}
       onBlur={onBlur}
@@ -36,6 +37,7 @@ Input.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string,
   id: PropTypes.string,
+  className: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   required: PropTypes.bool,
@@ -47,6 +49,7 @@ Input.defaultProps = {
   type: 'text',
   name: '',
   id: '',
+  className: 'input',
   required: true,
   onChange: () => {},
   onBlur: () => {},
