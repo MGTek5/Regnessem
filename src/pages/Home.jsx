@@ -116,7 +116,7 @@ const Home = () => {
     if (usersData) {
       setUsers(usersData.getUsers);
     }
-    if (chatsData) {
+    if (chatsData && chatsData.getChats.length > 0) {
       setChats(chatsData.getChats);
       if (!selectedChat) {
         setSelectedChat(chatsData.getChats[0]._id);
