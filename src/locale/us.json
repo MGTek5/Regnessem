@@ -1,21 +1,25 @@
 {
   "translation": {
     "header": {
-      "home": "Home"
+      "settings": "Settings",
+      "profile": "Profile",
+      "signOut": "Sign out"
     },
     "footer": {
       "rgpd": "Legal notices"
     },
     "button": {
-      "submit": "Submit"
+      "submit": "Submit",
+      "validate": "Validate",
+      "cancel": "Cancel"
     },
     "register": {
       "title": "Register",
-      "subtitle":"You're just a few clicks away from creating your account",
-      "email":"Email",
-      "username":"Username",
-      "password":"Password",
-      "login":"sign in",
+      "subtitle": "You're just a few clicks away from creating your account",
+      "email": "Email",
+      "username": "Username",
+      "password": "Password",
+      "login": "sign in",
       "fun_boi": "I'm a fun boi"
     },
     "login": {
@@ -23,11 +27,22 @@
       "subtitle": "Type your email and password",
       "email": "Email",
       "password": "Password",
-      "fun_boi": "I'm a fun boi",
-      "register":"create an account"
+      "fun_boi": "I'm fun",
+      "register": "create an account"
+    },
+    "home": {
+      "new": "New conversation",
+      "searchBar": "Search a GIF",
+      "nothingToShow": "Nothing to show here",
+      "searchSomething": "Try to type something...",
+      "sendMessage": "Send a GIF to start the conversation"
+    },
+    "chatCreationForm": {
+      "search": "Search by username",
+      "username": "Username"
     },
     "common": {
-      "error":"Something went wrong"
+      "error": "Something went wrong"
     }
   }
 }

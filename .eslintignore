@@ -2,3 +2,6 @@ src/reportWebVitals.js
 src/index.js
 src/utils/apollo.js
 craco.config.js
+.eslintrc.js
+tailwind.config.js
+build/

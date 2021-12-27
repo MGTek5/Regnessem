@@ -1,22 +1,26 @@
 {
   "translation": {
     "header": {
-      "home": "Acceuil"
+      "settings": "Paramètres",
+      "profile": "Profil",
+      "signOut": "Déconnexion"
     },
     "footer": {
       "rgpd": "Mentions légales"
     },
     "button": {
-      "submit": "Envoyer"
+      "submit": "Envoyer",
+      "validate": "Valider",
+      "cancel": "Annuler"
     },
     "register": {
       "title": "Inscription",
-      "subtitle":"Créez votre compte en quelques clicks",
-      "email":"Email",
-      "username":"Nom utilisateur",
-      "password":"Mot de passe",
-      "login":"se connecter",
-      "fun_boi": "J'suis rigodrole"
+      "subtitle": "Créez votre compte en quelques clicks",
+      "email": "Email",
+      "username": "Nom utilisateur",
+      "password": "Mot de passe",
+      "login": "se connecter",
+      "fun_boi": "J'suis fun"
     },
     "login": {
       "title": "Connexion",
@@ -26,8 +30,19 @@
       "fun_boi": "J'suis rigodrole",
       "register": "créer un compte"
     },
+    "home": {
+      "new": "Nouvelle conversation",
+      "searchBar": "Rechercher un GIF",
+      "nothingToShow": "Il n'a y a rien a voir ici",
+      "searchSomething": "Essayer de rechercher quelque chose...",
+      "sendMessage": "Envoyer un GIF pour lancer la conversation"
+    },
+    "chatCreationForm": {
+      "search": "Chercher par nom d'utilisateur",
+      "username": "Nom d'utilisateur"
+    },
     "common": {
-      "error":"Il y a eu un problème"
+      "error": "Il y a eu un problème"
     }
   }
 }

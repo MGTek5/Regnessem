@@ -5,7 +5,6 @@ import { useMutation } from '@apollo/client';
 import { Link, useHistory } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Input from '../components/Input';
-// import Button from '../components/Button';
 import { LOGIN } from '../utils/graphql';
 
 const Login = () => {
@@ -42,7 +41,7 @@ const Login = () => {
     <div
       className="h-full w-full bg-cover bg-center relative"
     >
-      <img
+      <div
         alt="page background"
         style={{
           backgroundImage: `url(${getBackgroundImage()}`,
@@ -52,7 +51,7 @@ const Login = () => {
       <div style={{ background: 'rgba(0,0,0,0.85)' }} className="absolute top-0 left-0 h-screen w-screen" />
       <div className="w-full h-full flex justify-center items-center">
         <div className="card bordered w-full h-full sm:h-auto sm:w-auto md:w-96">
-          <div className="card-body h-full px-8 py-12 bg-gray-800">
+          <div className="card-body h-full px-8 py-12 bg-gray-900">
             <h2 className="card-title text-5xl font-bold text-center">{t('login.title')}</h2>
             <p className="text-center">{t('login.subtitle')}</p>
             <form onSubmit={formik.handleSubmit} className="mt-4">
@@ -64,7 +63,7 @@ const Login = () => {
                   <input type="checkbox" onChange={() => setIsAFunBoi((old) => !old)} checked={isAFunBoi} className="checkbox checkbox-primary" />
                 </div>
                 <button type="submit" className="btn btn-primary">{t('button.submit')}</button>
-                <Link to="/register" className="capitalize text-right">{t('login.register')}</Link>
+                <Link to="/register" className="capitalize text-right hover:underline">{t('login.register')}</Link>
               </div>
             </form>
           </div>
