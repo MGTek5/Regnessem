@@ -1,4 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  useContext, useEffect, useRef, useState,
+} from 'react';
 import {
   useQuery,
   useMutation,
@@ -36,6 +38,7 @@ const Home = () => {
   const [gifFilter, setGifFilter] = useState(undefined);
   const [selectedChat, setSelectedChat] = useState(null);
   const [newChatModalOpen, setNewChatModalOpen] = useState(false);
+  const chatRef = useRef();
   const { data: usersData } = useQuery(GET_USERS);
   const { data: chatsData } = useQuery(GET_CHATS);
   const [createChat] = useMutation(CREATE_CHAT);
@@ -54,8 +57,7 @@ const Home = () => {
     },
   });
   const scrollToBottom = () => {
-    const chat = document.getElementById('chat');
-    chat.scrollTop = chat.scrollHeight;
+    chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
   };
   const clearGifSearchBarInput = () => {
     const input = document.getElementById('gif-search');
@@ -181,7 +183,7 @@ const Home = () => {
               <input id="gif-search" className="input h-10 w-full m-2 ml-4" placeholder={t('home.searchBar')} onChange={(e) => setGifFilter(e.target.value)} />
             </div>
           </div>
-          <div id="chat" className="w-full h-full pb-3 overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-col">
+          <div ref={chatRef} className="w-full h-full pb-3 overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-col">
             {!messages.length
               ? (
                 <div className="h-full w-full flex flex-col items-center justify-center">
@@ -190,7 +192,13 @@ const Home = () => {
                   <Sad className="h-24 mt-8" />
                 </div>
               ) : (
-                messages.map((message) => <Message key={message._id} message={message} />)
+                messages.map((message) => (
+                  <Message
+                    key={message._id}
+                    message={message}
+                    loadingCompleteCallback={scrollToBottom}
+                  />
+                ))
               )}
           </div>
         </div>
