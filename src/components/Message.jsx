@@ -69,9 +69,9 @@ const Message = ({
 
   return (
     <div className={getContainerStyle()} ref={imgRef}>
-      {isLoading && <span>loading....</span>}
       <div className={getMessageStyle()}>
-        {isInView && <img alt={message._id} src={message.message} className="w-full" onLoad={handleLoadingComplete} />}
+        {isLoading && <img alt="theo's nose" src="/le-nez-de-theo.gif" className="w-full blur-md" />}
+        {isInView && <img alt={message._id} src={message.message} className="w-full" onLoad={handleLoadingComplete} onError={() => setIsLoading(false)} />}
       </div>
       <div className={getTooltipStyle()} data-tip={message.author.username}>
         <Picto className="h-6 w-6 mb-4 relative" members={[message.author]} />
