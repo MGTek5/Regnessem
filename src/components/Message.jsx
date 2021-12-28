@@ -43,8 +43,11 @@ const Message = ({
   const getTooltipStyle = () => {
     const common = 'tooltip';
     let style = '';
-    if (fromConnectedUser) style = 'tooltip-left';
-    else style = 'tooltip-right';
+    if (fromConnectedUser) {
+      style = 'tooltip-left';
+    } else {
+      style = 'tooltip-right';
+    }
     return [common, style].join(' ');
   };
 
