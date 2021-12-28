@@ -40,12 +40,25 @@ const Message = ({
     return [common, style].join(' ');
   };
 
+  const getTooltipStyle = () => {
+    const common = 'tooltip';
+    let style = '';
+    if (fromConnectedUser) {
+      style = 'tooltip-left';
+    } else {
+      style = 'tooltip-right';
+    }
+    return [common, style].join(' ');
+  };
+
   return (
     <div className={getContainerStyle()}>
       <div className={getMessageStyle()}>
         <img alt={message._id} src={message.message} className="w-full" />
       </div>
-      <Picto className="h-6 w-6 mb-4 relative" members={[message.author]} />
+      <div className={getTooltipStyle()} data-tip={message.author.username}>
+        <Picto className="h-6 w-6 mb-4 relative" members={[message.author]} />
+      </div>
     </div>
   );
 };
