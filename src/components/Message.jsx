@@ -1,18 +1,29 @@
-import React, { useContext, useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
+import React, {
+  useContext, useEffect, useRef, useState,
+} from 'react';
+import PropTypes from 'prop-types';
 import MessageModel from '../types/message';
 import Picto from './Picto';
 import UserContext from '../contexts/user.context';
+import useIntersection from '../hooks/useIntersectionObserver';
 
 const Message = ({
   message,
+  loadingCompleteCallback,
 }) => {
   const [fromConnectedUser, setFromConnectedUser] = useState(false);
   const userContext = useContext(UserContext);
+  const [isInView, setIsInView] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const imgRef = useRef();
 
   useEffect(() => {
     setFromConnectedUser(message.author._id === userContext.user._id);
   }, [userContext.user._id, message.author._id]);
+
+  useIntersection(imgRef, () => {
+    setIsInView(true);
+  });
 
   const getContainerStyle = () => {
     const common = 'flex items-end p-2 justify-end';
@@ -51,10 +62,16 @@ const Message = ({
     return [common, style].join(' ');
   };
 
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+    loadingCompleteCallback();
+  };
+
   return (
-    <div className={getContainerStyle()}>
+    <div className={getContainerStyle()} ref={imgRef}>
+      {isLoading && <span>loading....</span>}
       <div className={getMessageStyle()}>
-        <img alt={message._id} src={message.message} className="w-full" />
+        {isInView && <img alt={message._id} src={message.message} className="w-full" onLoad={handleLoadingComplete} />}
       </div>
       <div className={getTooltipStyle()} data-tip={message.author.username}>
         <Picto className="h-6 w-6 mb-4 relative" members={[message.author]} />
@@ -65,6 +82,7 @@ const Message = ({
 
 Message.propTypes = {
   message: MessageModel.isRequired,
+  loadingCompleteCallback: PropTypes.func.isRequired,
 };
 
 Message.defaultProps = {};
