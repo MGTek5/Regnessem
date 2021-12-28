@@ -58,9 +58,6 @@ const Home = () => {
   });
   const scrollToBottom = () => {
     chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
-
-    /*     const chat = document.getElementById('chat');
-        chat.scrollTop = chat.scrollHeight; */
   };
   const clearGifSearchBarInput = () => {
     const input = document.getElementById('gif-search');
