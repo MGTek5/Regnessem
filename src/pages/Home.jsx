@@ -65,7 +65,7 @@ const Home = () => {
     setGifs([]);
     setGifFilter('');
   };
-  const sendMessage = (content) => {
+  const sendMessage = (content, dimensions) => {
     clearGifSearchBarInput();
     createMessage({
       variables: {
@@ -73,6 +73,8 @@ const Home = () => {
           chat: selectedChat,
           author: userContext.user._id,
           message: content,
+          width: dimensions[0],
+          height: dimensions[1],
         },
       },
     });
@@ -171,7 +173,12 @@ const Home = () => {
                 ) : (
                   <div className="max-h-full overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-wrap">
                     {gifs.map((gif) => (
-                      <button key={gif.id} type="button" className="w-1/2" onClick={() => sendMessage(gif.media[0].gif.url)}>
+                      <button
+                        key={gif.id}
+                        type="button"
+                        className="w-1/2"
+                        onClick={() => sendMessage(gif.media[0].gif.url, gif.media[0].gif.dims)}
+                      >
                         <img className="w-48 h-48" alt={gif.id} src={gif.media[0].gif.url} />
                       </button>
                     ))}
@@ -197,6 +204,7 @@ const Home = () => {
                     key={message._id}
                     message={message}
                     loadingCompleteCallback={scrollToBottom}
+                    chatRef={chatRef}
                   />
                 ))
               )}

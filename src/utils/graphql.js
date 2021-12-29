@@ -83,6 +83,8 @@ const GET_MESSAGES = gql`
     getMessages(chatId: $chatId) {
       _id
       message
+      height
+      width
       author {
         _id
         username
@@ -100,6 +102,8 @@ const MESSAGE_CREATED = gql`
         _id
       }
       message
+      width
+      height
       author {
         _id
         username
