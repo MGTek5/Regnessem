@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@apollo/client';
@@ -6,12 +6,14 @@ import { Link, useHistory } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Input from '../components/Input';
 import { LOGIN } from '../utils/graphql';
+import UserContext from '../contexts/user.context';
 
 const Login = () => {
   const { t } = useTranslation();
   const [isAFunBoi, setIsAFunBoi] = useState(false);
   const [login] = useMutation(LOGIN);
   const history = useHistory();
+  const userContext = useContext(UserContext);
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -26,6 +28,8 @@ const Login = () => {
         });
         localStorage.setItem('regnessem-token', data.data.login.access_token);
         localStorage.setItem('regnessem-user', JSON.stringify(data.data.login.user));
+        userContext.user = data.data.login.user;
+        userContext.authed = true;
         history.push('/');
       } catch (error) {
         toast.error(t('common.error'));
