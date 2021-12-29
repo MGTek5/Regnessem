@@ -21,7 +21,7 @@ const Message = ({
 
   useEffect(() => {
     setFromConnectedUser(message.author._id === userContext.user._id);
-  }, [userContext.user._id, message.author._id, chatRef]);
+  }, [userContext.user._id, message.author._id]);
 
   useIntersection(imgRef, () => {
     setIsInView(true);
