@@ -82,7 +82,6 @@ const Home = () => {
 
   useEffect(() => {
     if (chatCreatedData) {
-      // TODO play sound if not created by connected user (members[0]._id)
       const newChat = chatCreatedData.chatCreated;
       setChats((old) => [newChat, ...old]);
       return;
@@ -165,9 +164,7 @@ const Home = () => {
                 ? (
                   <div className="h-full items-center justify-center flex flex-col">
                     <Search className="w-16 animate-bounce" />
-                    {/* eslint-disable-next-line react/self-closing-comp */}
                     <span>{t('home.nothingToShow')}</span>
-                    {/* eslint-disable-next-line react/self-closing-comp */}
                     <span>{t('home.searchSomething')}</span>
                   </div>
                 ) : (
