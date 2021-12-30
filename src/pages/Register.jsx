@@ -56,7 +56,7 @@ const Register = () => {
       <div style={{ background: 'rgba(0,0,0,0.85)' }} className="absolute top-0 left-0 h-screen w-screen" />
       <div className="w-full h-full flex justify-center items-center">
         <div className="card bordered w-full h-full sm:h-auto sm:w-auto md:w-96">
-          <div className="card-body h-full px-8 py-12 bg-gray-800">
+          <div className="card-body h-full px-8 py-12 bg-slate-800">
             <h2 className="card-title text-5xl font-bold text-center">{t('register.title')}</h2>
             <p className="text-center">{t('register.subtitle')}</p>
             <form onSubmit={formik.handleSubmit} className="mt-4">
