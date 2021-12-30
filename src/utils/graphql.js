@@ -66,6 +66,14 @@ const CREATE_CHAT = gql`
   }
 `;
 
+const DELETE_CHAT = gql`
+  mutation($chatId: String!) {
+    deleteChat(id: $chatId) {
+      _id
+    }
+  }
+`;
+
 const CHAT_CREATED = gql`
   subscription {
     chatCreated {
@@ -77,6 +85,14 @@ const CHAT_CREATED = gql`
         username
         profileGif
       }
+    }
+  }
+`;
+
+const CHAT_DELETED = gql`
+  subscription {
+    chatDeleted {
+      _id
     }
   }
 `;
@@ -130,7 +146,9 @@ export {
   GET_USERS,
   GET_CHATS,
   CREATE_CHAT,
+  DELETE_CHAT,
   CHAT_CREATED,
+  CHAT_DELETED,
   GET_MESSAGES,
   MESSAGE_CREATED,
   CREATE_MESSAGE,

@@ -26,8 +26,11 @@ import {
   GET_MESSAGES,
   MESSAGE_CREATED,
   CREATE_MESSAGE,
+  CHAT_DELETED,
+  DELETE_CHAT,
 } from '../utils/graphql';
 import Sad from '../components/images/Sad';
+import Trash from '../components/images/Trash';
 import UserContext from '../contexts/user.context';
 
 const Home = () => {
@@ -44,8 +47,10 @@ const Home = () => {
   const { data: usersData } = useQuery(GET_USERS);
   const { data: chatsData } = useQuery(GET_CHATS);
   const [createChat] = useMutation(CREATE_CHAT);
+  const [deleteChat] = useMutation(DELETE_CHAT);
   const [createMessage] = useMutation(CREATE_MESSAGE);
   const { error: chatCreatedError, data: chatCreatedData } = useSubscription(CHAT_CREATED);
+  const { error: chatDeletedError, data: chatDeletedData } = useSubscription(CHAT_DELETED);
   const { error: messageCreatedError, data: messageCreatedData } = useSubscription(MESSAGE_CREATED);
   const userContext = useContext(UserContext);
   Howler.volume(0.4);
@@ -110,6 +115,15 @@ const Home = () => {
       toast.error(t('common.error'));
     }
   }, [messageCreatedError, newMessage, t, selectedChat]);
+
+  useEffect(() => {
+    if (chatDeletedData) {
+      setChats((old) => old.filter((chat) => chat._id !== chatDeletedData.chatDeleted._id));
+    }
+    if (chatDeletedError) {
+      toast.error(t('common.error'));
+    }
+  }, [chatDeletedError, chatDeletedData, t]);
 
   useEffect(() => {
     if (newMessage && newMessage.messageCreated.chat._id !== selectedChat) {
@@ -229,15 +243,32 @@ const Home = () => {
         </div>
         <div className="pr-3 overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray">
           {chats.map((chat) => (
-            <button
-              type="button"
-              className={'flex items-center pl-2 py-2 w-full text-white outline-none rounded-xl m-1 focus:outline-none '.concat(selectedChat === chat._id ? 'bg-pupule-900' : 'hover:bg-pupule-400')}
+            <div
+              className={'flex w-full rounded-xl m-1 focus:outline-none group '.concat(selectedChat === chat._id ? 'bg-pupule-900' : 'hover:bg-pupule-400')}
               key={chat._id}
-              onClick={() => setSelectedChat(chat._id)}
             >
-              <Picto members={chat.members} />
-              <span className="ml-3">{chat.name}</span>
-            </button>
+              <button
+                type="button"
+                className="flex items-center pl-2 py-2 w-full text-white outline-none"
+                onClick={() => setSelectedChat(chat._id)}
+              >
+                <Picto members={chat.members} />
+                <span className="ml-3">{chat.name}</span>
+              </button>
+              <button
+                type="button"
+                className="pr-3 hidden group-hover:block"
+                onClick={() => {
+                  deleteChat({
+                    variables: {
+                      chatId: chat._id,
+                    },
+                  });
+                }}
+              >
+                <Trash className="w-5 h-5" />
+              </button>
+            </div>
           ))}
         </div>
       </div>
