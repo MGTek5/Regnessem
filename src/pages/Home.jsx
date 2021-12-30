@@ -309,9 +309,23 @@ const Home = () => {
                 <button
                   type="button"
                   className="flex items-center pl-2 py-2 w-full text-white outline-none"
-                  onClick={() => handleChatChange(chat._id)}>
+                  onClick={() => handleChatChange(chat._id)}
+                >
                   <Picto members={chat.members} />
                   <span className="ml-3">{chat.name}</span>
+                </button>
+                <button
+                  type="button"
+                  className="pr-3 hidden group-hover:block"
+                  onClick={() => {
+                    deleteChat({
+                      variables: {
+                        chatId: chat._id,
+                      },
+                    });
+                  }}
+                >
+                  <Trash className="w-5 h-5" />
                 </button>
               </div>
             </div>
