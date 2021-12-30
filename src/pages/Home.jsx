@@ -104,7 +104,6 @@ const Home = () => {
         setMessages((old) => [...old, message]);
       } else {
         new Howl({ src: ['/you_suffer.mp3'] }).play();
-        // TODO: play sound
         // TODO: move conversation to the top
       }
       setNewMessage(null);
