@@ -254,22 +254,22 @@ const Home = () => {
               hasNewMessage
               && (
                 <div className="alert alert-info sticky top-0 cursor-pointer">
-                  <div className="flex-1 flex">
+                  <div className="flex flex-1">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-6 h-6 mx-2 stroke-current">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <p>Lorem ipsum dolor sit amet, consectetur adip!</p>
-                    <button
-                      className="justify-end"
-                      type="button"
-                      onClick={() => {
-                        setHasNewMessage(false);
-                        scrollToBottom();
-                      }}
-                    >
-                      Go there
-                    </button>
+                    <p>{t('home.newMessageAlert')}</p>
                   </div>
+                  <button
+                    className="self-end"
+                    type="button"
+                    onClick={() => {
+                      setHasNewMessage(false);
+                      scrollToBottom();
+                    }}
+                  >
+                    {t('home.navigateToMessage')}
+                  </button>
                 </div>
               )
             }

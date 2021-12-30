@@ -35,7 +35,9 @@
       "searchBar": "Search a GIF",
       "nothingToShow": "Nothing to show here",
       "searchSomething": "Try to type something...",
-      "sendMessage": "Send a GIF to start the conversation"
+      "sendMessage": "Send a GIF to start the conversation",
+      "navigateToMessage": "Go there",
+      "newMessageAlert": "New message(s) in chat"
     },
     "chatCreationForm": {
       "search": "Search by username",
