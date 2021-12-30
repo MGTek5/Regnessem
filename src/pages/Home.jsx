@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import * as namez from 'namez';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { Howl, Howler } from 'howler';
 import Plus from '../components/images/Plus';
 import NewChatModal from '../components/NewChatModal';
 import Picto from '../components/Picto';
@@ -38,6 +39,7 @@ const Home = () => {
   const [gifFilter, setGifFilter] = useState(undefined);
   const [selectedChat, setSelectedChat] = useState(null);
   const [newChatModalOpen, setNewChatModalOpen] = useState(false);
+  const [newMessage, setNewMessage] = useState(null);
   const chatRef = useRef();
   const { data: usersData } = useQuery(GET_USERS);
   const { data: chatsData } = useQuery(GET_CHATS);
@@ -46,6 +48,7 @@ const Home = () => {
   const { error: chatCreatedError, data: chatCreatedData } = useSubscription(CHAT_CREATED);
   const { error: messageCreatedError, data: messageCreatedData } = useSubscription(MESSAGE_CREATED);
   const userContext = useContext(UserContext);
+  Howler.volume(0.4);
   const [
     fetchMessages, {
       data: messagesData,
@@ -60,8 +63,6 @@ const Home = () => {
     chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
   };
   const clearGifSearchBarInput = () => {
-    const input = document.getElementById('gif-search');
-    input.value = '';
     setGifs([]);
     setGifFilter('');
   };
@@ -93,19 +94,24 @@ const Home = () => {
   }, [chatCreatedData, chatCreatedError, t]);
 
   useEffect(() => {
-    if (messageCreatedData) {
-      const message = messageCreatedData.messageCreated;
+    setNewMessage(messageCreatedData);
+  }, [messageCreatedData]);
+
+  useEffect(() => {
+    if (newMessage) {
+      const message = newMessage.messageCreated;
       if (selectedChat === message.chat._id) {
         setMessages((old) => [...old, message]);
       } else {
-        // TODO: play sound
+        new Howl({ src: ['/you_suffer.mp3'] }).play();
         // TODO: move conversation to the top
       }
+      setNewMessage(null);
     }
     if (messageCreatedError) {
       toast.error(t('common.error'));
     }
-  }, [messageCreatedError, messageCreatedData, t, selectedChat]);
+  }, [messageCreatedError, newMessage, t, selectedChat]);
 
   useEffect(() => {
     if (usersData) {
@@ -187,7 +193,7 @@ const Home = () => {
             }
             <div className="flex items-center">
               <Search className="h-6 w-6" />
-              <input id="gif-search" className="input h-10 w-full m-2 ml-4" placeholder={t('home.searchBar')} onChange={(e) => setGifFilter(e.target.value)} />
+              <input value={gifFilter} className="input h-10 w-full m-2 ml-4" placeholder={t('home.searchBar')} onChange={(e) => setGifFilter(e.target.value)} />
             </div>
           </div>
           <div ref={chatRef} className="w-full h-full pb-3 overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-col">
