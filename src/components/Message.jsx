@@ -58,7 +58,7 @@ const Message = ({
     if (fromConnectedUser) {
       style = 'bg-pupule-700 flex-row';
     } else {
-      style = 'bg-gray-900 flex-row-reverse';
+      style = 'bg-slate-900 flex-row-reverse';
     }
 
     return [common, style].join(' ');
