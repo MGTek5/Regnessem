@@ -9,7 +9,6 @@ import useIntersection from '../hooks/useIntersectionObserver';
 
 const Message = ({
   message,
-  loadingCompleteCallback,
   chatRef,
 }) => {
   const [fromConnectedUser, setFromConnectedUser] = useState(false);
@@ -77,7 +76,6 @@ const Message = ({
   };
 
   const handleLoadingComplete = () => {
-    loadingCompleteCallback();
   };
 
   return (
@@ -95,7 +93,6 @@ const Message = ({
 
 Message.propTypes = {
   message: MessageModel.isRequired,
-  loadingCompleteCallback: PropTypes.func.isRequired,
   chatRef: PropTypes.oneOfType([
     // Either a function
     PropTypes.func,
