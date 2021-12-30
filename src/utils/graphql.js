@@ -41,6 +41,7 @@ const GET_CHATS = gql`
     getChats {
       _id
       name
+      lastMessage
       members {
         _id
         profileGif
@@ -55,6 +56,7 @@ const CREATE_CHAT = gql`
     createChat(chatCreateData: $chatCreateData) {
       _id
       name
+      lastMessage
       members {
         _id
         profileGif
@@ -69,6 +71,7 @@ const CHAT_CREATED = gql`
     chatCreated {
       _id
       name
+      lastMessage
       members {
         _id
         username

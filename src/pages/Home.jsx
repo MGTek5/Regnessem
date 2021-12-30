@@ -103,7 +103,6 @@ const Home = () => {
         setMessages((old) => [...old, message]);
       } else {
         new Howl({ src: ['/you_suffer.mp3'] }).play();
-        // TODO: move conversation to the top
       }
       setNewMessage(null);
     }
@@ -111,6 +110,13 @@ const Home = () => {
       toast.error(t('common.error'));
     }
   }, [messageCreatedError, newMessage, t, selectedChat]);
+
+  useEffect(() => {
+    if (newMessage && newMessage.messageCreated.chat._id !== selectedChat) {
+      const sortedChats = [...chats].sort((a, b) => a.lastMessage - b.lastMessage);
+      setChats(sortedChats);
+    }
+  }, [newMessage, chats, selectedChat]);
 
   useEffect(() => {
     if (usersData) {
