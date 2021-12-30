@@ -33,6 +33,17 @@ import Sad from '../components/images/Sad';
 import Trash from '../components/images/Trash';
 import UserContext from '../contexts/user.context';
 
+function isInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.top >= 0
+    && rect.left >= 0
+    && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+
+  );
+}
+
 const Home = () => {
   const { t } = useTranslation();
   const [users, setUsers] = useState([]);
@@ -43,6 +54,8 @@ const Home = () => {
   const [selectedChat, setSelectedChat] = useState(null);
   const [newChatModalOpen, setNewChatModalOpen] = useState(false);
   const [newMessage, setNewMessage] = useState(null);
+  const [notifiedChats, setNotifiedChats] = useState([]);
+  const [hasNewMessage, setHasNewMessage] = useState(false);
   const chatRef = useRef();
   const { data: usersData } = useQuery(GET_USERS);
   const { data: chatsData } = useQuery(GET_CHATS);
@@ -64,9 +77,18 @@ const Home = () => {
       chatId: selectedChat,
     },
   });
+
   const scrollToBottom = () => {
-    chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+    const { children } = chatRef.current;
+    const scrollInterval = setInterval(() => {
+      if (isInViewport(children[children.length - 1])) {
+        clearInterval(scrollInterval);
+      } else {
+        children[children.length - 1].scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 500);
   };
+
   const clearGifSearchBarInput = () => {
     setGifs([]);
     setGifFilter('');
@@ -102,19 +124,31 @@ const Home = () => {
   }, [messageCreatedData]);
 
   useEffect(() => {
+    if (notifiedChats.includes(selectedChat)) {
+      setNewMessage(true);
+    }
+  }, [selectedChat, notifiedChats]);
+
+  useEffect(() => {
     if (newMessage) {
       const message = newMessage.messageCreated;
       if (selectedChat === message.chat._id) {
         setMessages((old) => [...old, message]);
+        if (message.author._id === userContext.user._id) {
+          scrollToBottom();
+        } else {
+          setHasNewMessage(true);
+        }
       } else {
         new Howl({ src: ['/you_suffer.mp3'] }).play();
+        setNotifiedChats((old) => [...old, message.chat._id]);
       }
       setNewMessage(null);
     }
     if (messageCreatedError) {
       toast.error(t('common.error'));
     }
-  }, [messageCreatedError, newMessage, t, selectedChat]);
+  }, [messageCreatedError, newMessage, t, selectedChat, userContext]);
 
   useEffect(() => {
     if (chatDeletedData) {
@@ -157,6 +191,7 @@ const Home = () => {
   useEffect(() => {
     if (messagesData) {
       setMessages(messagesData.getMessages);
+      scrollToBottom();
     }
   }, [messagesData]);
 
@@ -176,9 +211,10 @@ const Home = () => {
     }
   }, [gifFilter, t]);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+  const handleChatChange = (id) => {
+    setSelectedChat(id);
+    setNotifiedChats((old) => [...old].filter((e) => e !== id));
+  };
 
   return (
     <div className="flex h-full">
@@ -214,6 +250,29 @@ const Home = () => {
             </div>
           </div>
           <div ref={chatRef} className="w-full h-full pb-3 overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-col">
+            {
+              hasNewMessage
+              && (
+                <div className="alert alert-info sticky top-0 cursor-pointer">
+                  <div className="flex flex-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-6 h-6 mx-2 stroke-current">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p>{t('home.newMessageAlert')}</p>
+                  </div>
+                  <button
+                    className="self-end"
+                    type="button"
+                    onClick={() => {
+                      setHasNewMessage(false);
+                      scrollToBottom();
+                    }}
+                  >
+                    {t('home.navigateToMessage')}
+                  </button>
+                </div>
+              )
+            }
             {!messages.length
               ? (
                 <div className="h-full w-full flex flex-col items-center justify-center">
@@ -226,7 +285,6 @@ const Home = () => {
                   <Message
                     key={message._id}
                     message={message}
-                    loadingCompleteCallback={scrollToBottom}
                     chatRef={chatRef}
                   />
                 ))
@@ -243,51 +301,54 @@ const Home = () => {
         </div>
         <div className="pr-3 overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray">
           {chats.map((chat) => (
-            <div
-              className={'flex w-full rounded-xl m-1 focus:outline-none group '.concat(selectedChat === chat._id ? 'bg-pupule-900' : 'hover:bg-pupule-400')}
-              key={chat._id}
-            >
-              <button
-                type="button"
-                className="flex items-center pl-2 py-2 w-full text-white outline-none"
-                onClick={() => setSelectedChat(chat._id)}
+            <div className="indicator w-full">
+              <div
+                className={'flex w-full rounded-xl m-1 focus:outline-none group '.concat(selectedChat === chat._id ? 'bg-pupule-900' : 'hover:bg-pupule-400')}
+                key={chat._id}
               >
-                <Picto members={chat.members} />
-                <span className="ml-3">{chat.name}</span>
-              </button>
-              <button
-                type="button"
-                className="pr-3 hidden group-hover:block"
-                onClick={() => {
-                  deleteChat({
-                    variables: {
-                      chatId: chat._id,
-                    },
-                  });
-                }}
-              >
-                <Trash className="w-5 h-5" />
-              </button>
+                {notifiedChats.includes(chat._id) && <div className="indicator-item badge badge-secondary" />}
+                <button
+                  type="button"
+                  className="flex items-center pl-2 py-2 w-full text-white outline-none"
+                  onClick={() => handleChatChange(chat._id)}
+                >
+                  <Picto members={chat.members} />
+                  <span className="ml-3">{chat.name}</span>
+                </button>
+                <button
+                  type="button"
+                  className="pr-3 hidden group-hover:block"
+                  onClick={() => {
+                    deleteChat({
+                      variables: {
+                        chatId: chat._id,
+                      },
+                    });
+                  }}
+                >
+                  <Trash className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           ))}
         </div>
-      </div>
-      <NewChatModal
-        users={users}
-        isOpen={newChatModalOpen}
-        closeCb={() => setNewChatModalOpen(false)}
-        createCb={(selectedUsers) => {
-          createChat({
-            variables: {
-              chatCreateData: {
-                name: namez({ format: 'title', separator: ' ' }),
-                members: selectedUsers,
+        <NewChatModal
+          users={users}
+          isOpen={newChatModalOpen}
+          closeCb={() => setNewChatModalOpen(false)}
+          createCb={(selectedUsers) => {
+            createChat({
+              variables: {
+                chatCreateData: {
+                  name: namez({ format: 'title', separator: ' ' }),
+                  members: selectedUsers,
+                },
               },
-            },
-          });
-          setNewChatModalOpen(false);
-        }}
-      />
+            });
+            setNewChatModalOpen(false);
+          }}
+        />
+      </div>
     </div>
   );
 };
