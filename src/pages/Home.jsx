@@ -191,6 +191,7 @@ const Home = () => {
   useEffect(() => {
     if (messagesData) {
       setMessages(messagesData.getMessages);
+      scrollToBottom();
     }
   }, [messagesData]);
 
