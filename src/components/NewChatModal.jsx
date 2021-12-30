@@ -17,12 +17,12 @@ const NewChatModal = ({
   const [selectedUsers, setSelectedUsers] = useState([]);
 
   useEffect(() => {
-    if (userContext.user) {
+    if (userContext.user && selectedUsers) {
       if (!selectedUsers.includes(userContext.user._id)) {
         setSelectedUsers((old) => [userContext.user._id, ...old]);
       }
     }
-  }, [userContext]); // eslint-disable-line
+  }, [userContext, selectedUsers]);
 
   return (
     <div className={'modal '.concat(isOpen ? 'modal-open' : '')}>

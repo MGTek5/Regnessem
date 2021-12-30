@@ -20,7 +20,7 @@ const PrivateRoute = ({
 PrivateRoute.propTypes = {
   path: propTypes.string.isRequired,
   exact: propTypes.bool.isRequired,
-  component: propTypes.node.isRequired,
+  component: propTypes.func.isRequired,
 };
 
 const Router = () => (
