@@ -79,7 +79,8 @@ const Home = () => {
   });
 
   const scrollToBottom = () => {
-    const { children } = chatRef.current;
+    const { children } = chatRef?.current || { children: null };
+    if (!children) return;
     const scrollInterval = setInterval(() => {
       if (isInViewport(children[children.length - 1])) {
         clearInterval(scrollInterval);
@@ -256,7 +257,7 @@ const Home = () => {
               <input value={gifFilter} className="input h-10 w-full m-2 ml-4" placeholder={t('home.searchBar')} onChange={(e) => setGifFilter(e.target.value)} />
             </div>
           </div>
-          <div ref={chatRef} className="w-full h-full pb-3 flex flex-col">
+          <div className="w-full h-full pb-3 flex flex-col">
             {!messages.length
               ? (
                 <div className="h-full w-full flex flex-col items-center justify-center">
@@ -316,10 +317,9 @@ const Home = () => {
         </div>
         <div className="pr-3 overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray">
           {chats.map((chat) => (
-            <div className="indicator w-full">
+            <div className="indicator w-full" key={chat._id}>
               <div
                 className={'flex w-full rounded-xl m-1 focus:outline-none group '.concat(selectedChat === chat._id ? 'bg-pupule-900' : 'hover:bg-pupule-400')}
-                key={chat._id}
               >
                 {notifiedChats.includes(chat._id) && <div className="indicator-item badge badge-secondary" />}
                 <button
