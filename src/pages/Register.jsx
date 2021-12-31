@@ -11,7 +11,7 @@ import UserContext from '../contexts/user.context';
 const Register = () => {
   const { t } = useTranslation();
   const [isAFunBoi, setIsAFunBoi] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [register] = useMutation(REGISTER, { onCompleted: () => setLoading(false) });
   const history = useHistory();
   const userContext = useContext(UserContext);
@@ -23,6 +23,7 @@ const Register = () => {
     },
     onSubmit: async (values) => {
       try {
+        setLoading(true);
         const data = await register({
           variables: {
             registerData: { ...values },
@@ -59,7 +60,7 @@ const Register = () => {
         <div className="card w-full h-full sm:h-auto sm:w-auto md:w-96">
           {loading && (
             <div className="w-full h-full absolute bg-slate-900 opacity-90 flex flex-col justify-center items-center">
-              <h3>Loading</h3>
+              <h3>{t('common.loading')}</h3>
             </div>
           )}
           <div className="card-body h-full px-8 py-12 bg-slate-900">

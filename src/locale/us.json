@@ -44,7 +44,8 @@
       "username": "Username"
     },
     "common": {
-      "error": "Something went wrong"
+      "error": "Something went wrong",
+      "loading": "loading..."
     }
   }
 }

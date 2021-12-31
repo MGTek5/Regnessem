@@ -44,7 +44,8 @@
       "username": "Nom d'utilisateur"
     },
     "common": {
-      "error": "Il y a eu un problème"
+      "error": "Il y a eu un problème",
+      "loading": "chargement en cours..."
     }
   }
 }

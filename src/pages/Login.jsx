@@ -11,7 +11,8 @@ import UserContext from '../contexts/user.context';
 const Login = () => {
   const { t } = useTranslation();
   const [isAFunBoi, setIsAFunBoi] = useState(false);
-  const [login] = useMutation(LOGIN);
+  const [loading, setLoading] = useState(false);
+  const [login] = useMutation(LOGIN, { onCompleted: () => setLoading(false) });
   const history = useHistory();
   const userContext = useContext(UserContext);
   const formik = useFormik({
@@ -21,6 +22,7 @@ const Login = () => {
     },
     onSubmit: async (values) => {
       try {
+        setLoading(true);
         const data = await login({
           variables: {
             loginData: { ...values },
@@ -55,6 +57,11 @@ const Login = () => {
       <div style={{ background: 'rgba(0,0,0,0.85)' }} className="absolute top-0 left-0 h-screen w-screen" />
       <div className="w-full h-full flex justify-center items-center">
         <div className="card w-full h-full sm:h-auto sm:w-auto md:w-96">
+          {loading && (
+            <div className="w-full h-full absolute bg-slate-900 opacity-90 flex flex-col justify-center items-center">
+              <h3>{t('common.loading')}</h3>
+            </div>
+          )}
           <div className="card-body h-full px-8 py-12 bg-slate-900">
             <h2 className="card-title text-5xl font-bold text-center">{t('login.title')}</h2>
             <p className="text-center">{t('login.subtitle')}</p>
