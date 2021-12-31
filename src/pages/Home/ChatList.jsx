@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import propTypes from 'prop-types';
+import { confirmAlert } from 'react-confirm-alert';
 import Plus from '../../components/images/Plus';
 import Picto from '../../components/Picto';
 import Trash from '../../components/images/Trash';
@@ -36,11 +37,23 @@ const ChatList = ({
                 type="button"
                 className="ml-2 pr-3 opacity-0 transition-opacity group-hover:opacity-100"
                 onClick={() => {
-                  // TODO: add confirm alert (maybe swal2)
-                  deleteChat({
-                    variables: {
-                      chatId: chat._id,
-                    },
+                  confirmAlert({
+                    title: t('common.areYouSure'),
+                    message: t('home.areYouSureChatDelete'),
+                    overlayClassName: 'bg-slate-700 text-white',
+                    buttons: [
+                      {
+                        label: t('common.yes'),
+                        onClick: () => deleteChat({
+                          variables: {
+                            chatId: chat._id,
+                          },
+                        }),
+                      },
+                      {
+                        label: t('common.no'),
+                      },
+                    ],
                   });
                 }}
               >

@@ -37,7 +37,8 @@
       "searchSomething": "Essayer de rechercher quelque chose...",
       "sendMessage": "Envoyer un GIF pour lancer la conversation",
       "navigateToMessage": "Y aller",
-      "newMessageAlert": "Nouveau(x) message(s) dans la conversation"
+      "newMessageAlert": "Nouveau(x) message(s) dans la conversation",
+      "areYouSureChatDelete": "etes-vous sure de vouloir eliminer ce chat ?"
     },
     "chatCreationForm": {
       "search": "Chercher par nom d'utilisateur",
@@ -45,7 +46,10 @@
     },
     "common": {
       "error": "Il y a eu un problème",
-      "loading": "chargement en cours..."
+      "loading": "chargement en cours...",
+      "areYouSure": "etes-vous sure ?",
+      "yes": "oui",
+      "no": "non"
     }
   }
 }
