@@ -10,14 +10,11 @@ import {
 import { useTranslation } from 'react-i18next';
 import * as namez from 'namez';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { Howl, Howler } from 'howler';
 import Plus from '../components/images/Plus';
 import NewChatModal from '../components/NewChatModal';
 import Picto from '../components/Picto';
-import Search from '../components/images/Search';
 import Message from '../components/Message';
-import { TENOR_API_BASE_URL, TENOR_API_KEY } from '../constant';
 import {
   GET_USERS,
   GET_CHATS,
@@ -32,6 +29,7 @@ import {
 import Sad from '../components/images/Sad';
 import Trash from '../components/images/Trash';
 import UserContext from '../contexts/user.context';
+import GifSearch from './Home/GifSearch';
 
 function isInViewport(el) {
   const rect = el.getBoundingClientRect();
@@ -48,9 +46,7 @@ const Home = () => {
   const { t } = useTranslation();
   const [users, setUsers] = useState([]);
   const [chats, setChats] = useState([]);
-  const [gifs, setGifs] = useState([]);
   const [messages, setMessages] = useState([]);
-  const [gifFilter, setGifFilter] = useState(undefined);
   const [selectedChat, setSelectedChat] = useState(null);
   const [newChatModalOpen, setNewChatModalOpen] = useState(false);
   const [newMessage, setNewMessage] = useState(null);
@@ -90,12 +86,7 @@ const Home = () => {
     }, 500);
   };
 
-  const clearGifSearchBarInput = () => {
-    setGifs([]);
-    setGifFilter('');
-  };
   const sendMessage = (content, dimensions) => {
-    clearGifSearchBarInput();
     createMessage({
       variables: {
         messageCreateData: {
@@ -203,22 +194,6 @@ const Home = () => {
     }
   }, [messagesData]);
 
-  useEffect(() => {
-    const fetchGifs = async () => {
-      try {
-        const res = await axios.get(`${TENOR_API_BASE_URL}/search?key=${TENOR_API_KEY}&q=${gifFilter}`);
-        setGifs(res.data.results);
-      } catch (err) {
-        toast.error(t('common.error'));
-      }
-    };
-
-    setGifs([]);
-    if (gifFilter && gifFilter.length >= 3) {
-      fetchGifs();
-    }
-  }, [gifFilter, t]);
-
   const handleChatChange = (id) => {
     setSelectedChat(id);
     setNotifiedChats((old) => [...old].filter((e) => e !== id));
@@ -228,35 +203,7 @@ const Home = () => {
     <div className="flex h-full">
       <div className="w-4/5">
         <div className="w-full h-full flex">
-          <div className="flex flex-col items-center justify-between shadow-md w-96 h-full">
-            {
-              !gifs.length
-                ? (
-                  <div className="h-full items-center justify-center flex flex-col">
-                    <Search className="w-16 animate-bounce" />
-                    <span>{t('home.nothingToShow')}</span>
-                    <span>{t('home.searchSomething')}</span>
-                  </div>
-                ) : (
-                  <div className="max-h-full overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray flex flex-wrap">
-                    {gifs.map((gif) => (
-                      <button
-                        key={gif.id}
-                        type="button"
-                        className="w-1/2"
-                        onClick={() => sendMessage(gif.media[0].gif.url, gif.media[0].gif.dims)}
-                      >
-                        <img className="w-48 h-48" alt={gif.id} src={gif.media[0].gif.url} />
-                      </button>
-                    ))}
-                  </div>
-                )
-            }
-            <div className="flex items-center">
-              <Search className="h-6 w-6" />
-              <input value={gifFilter} className="input h-10 w-full m-2 ml-4" placeholder={t('home.searchBar')} onChange={(e) => setGifFilter(e.target.value)} />
-            </div>
-          </div>
+          <GifSearch sendMessage={sendMessage} />
           <div className="w-full h-full pb-3 flex flex-col">
             {!messages.length
               ? (
