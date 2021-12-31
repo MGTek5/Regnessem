@@ -39,6 +39,12 @@
       "navigateToMessage": "Y aller",
       "newMessageAlert": "Nouveau(x) message(s) dans la conversation"
     },
+    "profile": {
+      "changeGif": "Nouveau GIF de profil",
+      "changeUsername": "Nouveau nom d'utilisateur",
+      "changeEmail": "Nouvelle adresse email",
+      "changePassword": "Nouveau mot de passe"
+    },
     "chatCreationForm": {
       "search": "Chercher par nom d'utilisateur",
       "username": "Nom d'utilisateur"

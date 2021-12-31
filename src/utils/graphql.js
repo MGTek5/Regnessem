@@ -140,6 +140,17 @@ const CREATE_MESSAGE = gql`
   }
 `;
 
+const UPDATE_USER = gql`
+  mutation ($userUpdateData: UserUpdateInput!) {
+    updateUser(userUpdateData: $userUpdateData) {
+      _id
+      username
+      email
+      profileGif
+    }
+  }
+`;
+
 export {
   REGISTER,
   LOGIN,
@@ -152,4 +163,5 @@ export {
   GET_MESSAGES,
   MESSAGE_CREATED,
   CREATE_MESSAGE,
+  UPDATE_USER,
 };

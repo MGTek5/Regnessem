@@ -60,8 +60,8 @@ const Login = () => {
             <p className="text-center">{t('login.subtitle')}</p>
             <form onSubmit={formik.handleSubmit} className="mt-4">
               <div className="flex flex-col space-y-2">
-                <Input label={t('login.email')} name="email" type="email" onBlur={formik.handleBlur} onChange={formik.handleChange} id="email" />
-                <Input label={t('login.password')} name="password" type="password" onBlur={formik.handleBlur} onChange={formik.handleChange} id="password" />
+                <Input value={formik.values.email} label={t('login.email')} name="email" type="email" onBlur={formik.handleBlur} onChange={formik.handleChange} id="email" />
+                <Input value={formik.values.password} label={t('login.password')} name="password" type="password" onBlur={formik.handleBlur} onChange={formik.handleChange} id="password" />
                 <div className="flex justify-end mt-2">
                   <span className="mr-2">{t('login.fun_boi')}</span>
                   <input type="checkbox" onChange={() => setIsAFunBoi((old) => !old)} checked={isAFunBoi} className="checkbox checkbox-primary" />

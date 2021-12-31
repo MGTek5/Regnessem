@@ -8,6 +8,7 @@ const Input = ({
   name,
   id,
   className,
+  value,
   onChange,
   onBlur,
   required,
@@ -25,6 +26,7 @@ const Input = ({
       id={id}
       className={className}
       placeholder={placeholder}
+      value={value}
       onChange={onChange}
       onBlur={onBlur}
     />
@@ -35,10 +37,11 @@ Input.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   type: PropTypes.string,
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   id: PropTypes.string,
   className: PropTypes.string,
-  onChange: PropTypes.func,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
   required: PropTypes.bool,
 };
@@ -47,11 +50,9 @@ Input.defaultProps = {
   label: '',
   placeholder: '',
   type: 'text',
-  name: '',
   id: '',
   className: 'input',
   required: true,
-  onChange: () => {},
   onBlur: () => {},
 };
 
