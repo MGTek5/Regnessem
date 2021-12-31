@@ -28,8 +28,8 @@ const Login = () => {
         });
         localStorage.setItem('regnessem-token', data.data.login.access_token);
         localStorage.setItem('regnessem-user', JSON.stringify(data.data.login.user));
-        userContext.user = data.data.login.user;
-        userContext.authed = true;
+        userContext.setUser(data.data.login.user);
+        userContext.setAuthed(true);
         history.push('/');
       } catch (error) {
         toast.error(t('common.error'));

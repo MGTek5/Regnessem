@@ -28,6 +28,8 @@ const App = () => {
           value={{
             user,
             authed,
+            setUser,
+            setAuthed,
           }}
         >
           <ApolloProvider client={client}>
