@@ -14,7 +14,6 @@ import { Howl, Howler } from 'howler';
 import Plus from '../components/images/Plus';
 import NewChatModal from '../components/NewChatModal';
 import Picto from '../components/Picto';
-import Message from '../components/Message';
 import {
   GET_USERS,
   GET_CHATS,
@@ -26,10 +25,10 @@ import {
   CHAT_DELETED,
   DELETE_CHAT,
 } from '../utils/graphql';
-import Sad from '../components/images/Sad';
 import Trash from '../components/images/Trash';
 import UserContext from '../contexts/user.context';
 import GifSearch from './Home/GifSearch';
+import Chat from './Home/Chat';
 
 function isInViewport(el) {
   const rect = el.getBoundingClientRect();
@@ -99,13 +98,6 @@ const Home = () => {
       },
     });
   };
-  const getCurrentChatName = () => (
-    chats.find((chat) => chat._id === selectedChat).name
-  );
-
-  const getCurrentChatUsernames = () => (
-    chats.find((chat) => chat._id === selectedChat).members.map((member) => member.username)
-  );
 
   useEffect(() => {
     if (chatCreatedData) {
@@ -202,57 +194,17 @@ const Home = () => {
   return (
     <div className="flex h-full">
       <div className="w-4/5">
-        <div className="w-full h-full flex">
+        <div className="w-full h-full flex flex-col lg:flex-row">
           <GifSearch sendMessage={sendMessage} />
-          <div className="w-full h-full pb-3 flex flex-col">
-            {!messages.length
-              ? (
-                <div className="h-full w-full flex flex-col items-center justify-center">
-                  <h2 className="text-2xl">{t('home.nothingToShow')}</h2>
-                  <h3 className="text-l">{t('home.sendMessage')}</h3>
-                  <Sad className="h-24 mt-8" />
-                </div>
-              ) : (
-                <div className="flex flex-col h-full">
-                  <div className="p-5 w-full flex justify-between items-center">
-                    <span className="font-bold mr-5">{getCurrentChatName()}</span>
-                    <span className="text-sm italic">{`(${getCurrentChatUsernames().join(', ')})`}</span>
-                  </div>
-                  {
-                    hasNewMessage
-                    && (
-                      <div className="alert alert-info sticky top-2 my-1 mx-2">
-                        <div className="flex flex-1">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-6 h-6 mx-2 stroke-current">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          <p>{t('home.newMessageAlert')}</p>
-                        </div>
-                        <button
-                          className="self-end hover:underline"
-                          type="button"
-                          onClick={() => {
-                            setHasNewMessage(false);
-                            scrollToBottom();
-                          }}
-                        >
-                          {t('home.navigateToMessage')}
-                        </button>
-                      </div>
-                    )
-                  }
-                  <div ref={chatRef} className="flex flex-col overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray">
-                    {messages.map((message) => (
-                      <Message
-                        key={message._id}
-                        message={message}
-                        chatRef={chatRef}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
-          </div>
+          <Chat
+            messages={messages}
+            chatRef={chatRef}
+            selectedChat={selectedChat}
+            chats={chats}
+            hasNewMessage={hasNewMessage}
+            setHasNewMessage={setHasNewMessage}
+            scrollToBottom={scrollToBottom}
+          />
         </div>
       </div>
       <div className="w-1/5 flex flex-col shadow-md">
