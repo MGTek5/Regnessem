@@ -17,7 +17,7 @@ const Chat = ({
   );
 
   return (
-    <div className="w-full h-full pb-3 flex flex-col">
+    <div className="w-full h-full p-0 lg:pb-3 flex flex-col">
       {!messages.length
         ? (
           <div className="h-full w-full flex flex-col items-center justify-center">
@@ -54,7 +54,7 @@ const Chat = ({
                 </div>
               )
             }
-            <div ref={chatRef} className="flex flex-col overflow-y-auto overflow-x-hidden scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray">
+            <div ref={chatRef} className="flex flex-col overflow-y-auto overflow-x-hidden scrollbar-w-2 lg:scrollbar-w-1 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray">
               {messages.map((message) => (
                 <Message
                   key={message._id}

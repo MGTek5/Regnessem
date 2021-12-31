@@ -190,22 +190,18 @@ const Home = () => {
   };
 
   return (
-    <div className="flex h-full">
-      <div className="w-4/5">
-        <div className="w-full h-full flex flex-col lg:flex-row">
-          <GifSearch sendMessage={sendMessage} />
-          <Chat
-            messages={messages}
-            chatRef={chatRef}
-            selectedChat={selectedChat}
-            chats={chats}
-            hasNewMessage={hasNewMessage}
-            setHasNewMessage={setHasNewMessage}
-            scrollToBottom={scrollToBottom}
-          />
-        </div>
-      </div>
-      <div className="w-1/5 flex flex-col shadow-md">
+    <div className="flex h-full flex-col lg:flex-row">
+      <GifSearch sendMessage={sendMessage} />
+      <div className="w-full flex h-full">
+        <Chat
+          messages={messages}
+          chatRef={chatRef}
+          selectedChat={selectedChat}
+          chats={chats}
+          hasNewMessage={hasNewMessage}
+          setHasNewMessage={setHasNewMessage}
+          scrollToBottom={scrollToBottom}
+        />
         <ChatList
           chats={chats}
           setNewChatModalOpen={setNewChatModalOpen}
@@ -214,23 +210,23 @@ const Home = () => {
           deleteChat={deleteChat}
           handleChatChange={handleChatChange}
         />
-        <NewChatModal
-          users={users}
-          isOpen={newChatModalOpen}
-          closeCb={() => setNewChatModalOpen(false)}
-          createCb={(selectedUsers) => {
-            createChat({
-              variables: {
-                chatCreateData: {
-                  name: namez({ format: 'title', separator: ' ' }),
-                  members: selectedUsers,
-                },
-              },
-            });
-            setNewChatModalOpen(false);
-          }}
-        />
       </div>
+      <NewChatModal
+        users={users}
+        isOpen={newChatModalOpen}
+        closeCb={() => setNewChatModalOpen(false)}
+        createCb={(selectedUsers) => {
+          createChat({
+            variables: {
+              chatCreateData: {
+                name: namez({ format: 'title', separator: ' ' }),
+                members: selectedUsers,
+              },
+            },
+          });
+          setNewChatModalOpen(false);
+        }}
+      />
     </div>
   );
 };

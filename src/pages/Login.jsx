@@ -34,6 +34,7 @@ const Login = () => {
         userContext.setAuthed(true);
         history.push('/');
       } catch (error) {
+        setLoading(false);
         toast.error(t('common.error'));
       }
     },

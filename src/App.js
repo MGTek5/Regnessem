@@ -35,11 +35,9 @@ const App = () => {
           <ApolloProvider client={client}>
             <Toaster />
             <Header />
-            <main className="overflow-hidden">
-              <Page>
-                <Router />
-              </Page>
-            </main>
+            <Page>
+              <Router />
+            </Page>
             <Footer />
           </ApolloProvider>
         </UserContext.Provider>

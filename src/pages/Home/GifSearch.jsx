@@ -33,7 +33,7 @@ const GifSearch = ({ sendMessage }) => {
   }, [gifFilter, t]);
 
   return (
-    <div className="flex flex-col items-center justify-between shadow-md w-96 h-full">
+    <div className="flex flex-col items-center justify-between shadow-md w-full lg:w-1/5 h-full">
       {
         !gifs.length
           ? (
@@ -60,7 +60,7 @@ const GifSearch = ({ sendMessage }) => {
             </div>
           )
       }
-      <div className="flex items-center">
+      <div className="flex items-center w-full">
         <Search className="h-6 w-6" />
         <input value={gifFilter} className="input h-10 w-full m-2 ml-4" placeholder={t('home.searchBar')} onChange={(e) => setGifFilter(e.target.value)} />
       </div>

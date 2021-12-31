@@ -10,7 +10,7 @@ const ChatList = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <>
+    <div className="w-1/5 lg:block hidden">
       <div className="flex w-full p-4 border-b items-center">
         <button type="button" className="outline-none p-1 flex items-center justify-between w-full" onClick={() => setNewChatModalOpen(true)}>
           <span className="flex items-center font-bold">{t('home.new')}</span>
@@ -34,8 +34,9 @@ const ChatList = ({
               </button>
               <button
                 type="button"
-                className="pr-3 hidden group-hover:block"
+                className="ml-2 pr-3 opacity-0 transition-opacity group-hover:opacity-100"
                 onClick={() => {
+                  // TODO: add confirm alert (maybe swal2)
                   deleteChat({
                     variables: {
                       chatId: chat._id,
@@ -49,8 +50,7 @@ const ChatList = ({
           </div>
         ))}
       </div>
-
-    </>
+    </div>
   );
 };
 

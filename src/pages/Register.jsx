@@ -36,6 +36,7 @@ const Register = () => {
         history.push('/');
       } catch (error) {
         toast.error(t('common.error'));
+        setLoading(false);
       }
     },
   });
