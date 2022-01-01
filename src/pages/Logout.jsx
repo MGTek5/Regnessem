@@ -11,8 +11,8 @@ const Logout = () => {
       setTimeout(() => {
         localStorage.removeItem('regnessem-token');
         localStorage.removeItem('regnessem-user');
-        userContext.user = null;
-        userContext.authed = false;
+        userContext.setUser(null);
+        userContext.setAuthed(false);
         history.push('/login');
       }, 2500);
     }

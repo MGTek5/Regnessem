@@ -24,7 +24,7 @@ const Input = ({
       type={type}
       name={name}
       id={id}
-      className={className}
+      className={`input ${className}`}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
@@ -53,7 +53,8 @@ Input.defaultProps = {
   id: '',
   className: 'input',
   required: true,
-  onBlur: () => {},
+  onChange: () => { },
+  onBlur: () => { },
 };
 
 export default Input;
