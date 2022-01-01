@@ -8,6 +8,7 @@ const LOGIN = gql`
         _id
         email
         username
+        profileGif
       }
     }
   }
