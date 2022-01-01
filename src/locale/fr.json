@@ -46,10 +46,10 @@
     },
     "common": {
       "error": "Il y a eu un problème",
-      "loading": "chargement en cours...",
-      "areYouSure": "etes-vous sure ?",
-      "yes": "oui",
-      "no": "non"
+      "loading": "Chargement en cours...",
+      "areYouSure": "Etes-vous sûr ?",
+      "yes": "Oui",
+      "no": "Non"
     }
   }
 }
