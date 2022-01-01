@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
+import toast from 'react-hot-toast';
 import Picto from '../components/Picto';
 import Input from '../components/Input';
 import UserContext from '../contexts/user.context';
@@ -29,7 +30,7 @@ const Profile = () => {
         userContext.user = data.data.updateUser;
         history.push('/');
       } catch (e) {
-        console.error(e);
+        toast.error(t('common.error'));
       }
     },
   });
