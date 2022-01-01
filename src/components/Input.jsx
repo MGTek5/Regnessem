@@ -53,7 +53,6 @@ Input.defaultProps = {
   id: '',
   className: 'input',
   required: true,
-  onChange: () => { },
   onBlur: () => { },
 };
 
