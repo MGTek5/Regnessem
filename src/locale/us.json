@@ -46,10 +46,10 @@
     },
     "common": {
       "error": "Something went wrong",
-      "loading": "loading...",
-      "areYouSure": "are you sure?",
-      "yes": "yes",
-      "no": "no"
+      "loading": "Loading...",
+      "areYouSure": "Are you sure?",
+      "yes": "Yes",
+      "no": "No"
     }
   }
 }
