@@ -48,7 +48,8 @@
     },
     "chatCreationForm": {
       "search": "Chercher par nom d'utilisateur",
-      "username": "Nom d'utilisateur"
+      "username": "Nom d'utilisateur",
+      "chatName": "Nom de la conversation"
     },
     "common": {
       "error": "Il y a eu un problème",
