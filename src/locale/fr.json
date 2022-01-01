@@ -37,7 +37,8 @@
       "searchSomething": "Essayer de rechercher quelque chose...",
       "sendMessage": "Envoyer un GIF pour lancer la conversation",
       "navigateToMessage": "Y aller",
-      "newMessageAlert": "Nouveau(x) message(s) dans la conversation"
+      "newMessageAlert": "Nouveau(x) message(s) dans la conversation",
+      "areYouSureChatDelete": "etes-vous sure de vouloir eliminer ce chat ?"
     },
     "profile": {
       "changeGif": "Nouveau GIF de profil",
@@ -50,7 +51,11 @@
       "username": "Nom d'utilisateur"
     },
     "common": {
-      "error": "Il y a eu un problème"
+      "error": "Il y a eu un problème",
+      "loading": "Chargement en cours...",
+      "areYouSure": "Etes-vous sûr ?",
+      "yes": "Oui",
+      "no": "Non"
     }
   }
 }
