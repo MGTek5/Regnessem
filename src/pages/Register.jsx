@@ -69,9 +69,9 @@ const Register = () => {
             <p className="text-center">{t('register.subtitle')}</p>
             <form onSubmit={formik.handleSubmit} className="mt-4">
               <div className="flex flex-col space-y-2">
-                <Input label={t('register.email')} name="email" type="email" onBlur={formik.handleBlur} onChange={formik.handleChange} id="email" />
-                <Input label={t('register.username')} name="username" onBlur={formik.handleBlur} onChange={formik.handleChange} id="username" />
-                <Input label={t('register.password')} name="password" type="password" onBlur={formik.handleBlur} onChange={formik.handleChange} id="password" />
+                <Input value={formik.values.email} label={t('register.email')} name="email" type="email" onBlur={formik.handleBlur} onChange={formik.handleChange} id="email" />
+                <Input value={formik.values.username} label={t('register.username')} name="username" onBlur={formik.handleBlur} onChange={formik.handleChange} id="username" />
+                <Input value={formik.values.password} label={t('register.password')} name="password" type="password" onBlur={formik.handleBlur} onChange={formik.handleChange} id="password" />
                 <div className="flex justify-end mt-2">
                   <span className="mr-2">{t('register.fun_boi')}</span>
                   <input type="checkbox" onChange={() => setIsAFunBoi((old) => !old)} checked={isAFunBoi} className="checkbox checkbox-primary" />

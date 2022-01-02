@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Logout from './pages/Logout';
+import Profile from './pages/Profile';
 import UserContext from './contexts/user.context';
 
 const PrivateRoute = ({
@@ -29,7 +30,8 @@ const Router = () => (
     <Route path="/login" exact component={Login} />
     <Route path="/logout" exact component={Logout} />
     <Route path="/register" exact component={Register} />
-    <PrivateRoute path="/" exact component={Home} />
+    <Route path="/" exact component={Home} />
+    <Route path="/profile" exact component={Profile} />
   </Switch>
 );
 

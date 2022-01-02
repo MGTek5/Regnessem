@@ -40,6 +40,12 @@
       "newMessageAlert": "Nouveau(x) message(s) dans la conversation",
       "areYouSureChatDelete": "etes-vous sure de vouloir eliminer ce chat ?"
     },
+    "profile": {
+      "changeGif": "Nouveau GIF de profil",
+      "changeUsername": "Nouveau nom d'utilisateur",
+      "changeEmail": "Nouvelle adresse email",
+      "changePassword": "Nouveau mot de passe"
+    },
     "chatCreationForm": {
       "search": "Chercher par nom d'utilisateur",
       "username": "Nom d'utilisateur"

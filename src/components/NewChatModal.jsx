@@ -22,22 +22,24 @@ const NewChatModal = ({
         setSelectedUsers((old) => [userContext.user._id, ...old]);
       }
     }
-  }, [userContext, selectedUsers]);
+  }, [selectedUsers, userContext]);
 
   return (
     <div className={'modal '.concat(isOpen ? 'modal-open' : '')}>
       <div className="modal-box">
         <h2 className="text-center font-bold mb-2 pb-2 border-b border-purple-500">{t('home.new')}</h2>
         <Input
+          value={userFilter}
           label={t('chatCreationForm.username')}
           type="text"
+          name="chatCreation"
           placeholder={t('chatCreationForm.search')}
           className="input input-primary input-bordered target:outline-none outline-none w-full mb-4 mt-1"
           onChange={(e) => setUserFilter(e.target.value)}
         />
         <div className="w-full max-h-96 overflow-y-auto overflow-x-hidden scrollbar-w-2 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray">
           {users.filter((user) => user.username.includes(userFilter)
-              && user._id !== userContext?.user?._id)
+              && user._id !== userContext.user?._id)
             .map((user) => (
               <button
                 type="button"
