@@ -50,6 +50,13 @@
       "search": "Chercher par nom d'utilisateur",
       "username": "Nom d'utilisateur"
     },
+    "confirmationModal": {
+      "confirm": "Confirmer",
+      "cancel": "Annuler",
+      "areYouSure": "Etes-vous sûr ?",
+      "deleteChat": "Vous êtes sur le point de supprimer cette conversation.\nCette action est irréversible.",
+      "deleteAccount": "Voulez vous vraiment supprimer votre compte ?"
+    },
     "common": {
       "error": "Il y a eu un problème",
       "loading": "Chargement en cours...",

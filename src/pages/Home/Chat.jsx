@@ -18,7 +18,7 @@ const Chat = ({
 
   return (
     <div className="w-full h-full p-0 lg:pb-3 flex flex-col">
-      {!messages.length
+      {!selectedChat || !messages.length
         ? (
           <div className="h-full w-full flex flex-col items-center justify-center">
             <h2 className="text-2xl">{t('home.nothingToShow')}</h2>
