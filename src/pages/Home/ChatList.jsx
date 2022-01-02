@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import propTypes from 'prop-types';
-import { confirmAlert } from 'react-confirm-alert';
 import Plus from '../../components/images/Plus';
 import Picto from '../../components/Picto';
 import Trash from '../../components/images/Trash';
+import ConfirmationModal from '../../components/ConfirmationModal';
 
 const ChatList = ({
   setNewChatModalOpen, chats, notifiedChats, handleChatChange, deleteChat, selectedChat,
 }) => {
   const [t] = useTranslation();
+  const [toDeleteChat, setToDeleteChat] = useState(null);
+
   return (
     <div className="w-1/5 lg:block hidden">
       <div className="flex w-full p-4 border-b items-center">
@@ -38,26 +40,7 @@ const ChatList = ({
               <button
                 type="button"
                 className="ml-2 pr-3 opacity-0 transition-opacity group-hover:opacity-100"
-                onClick={() => {
-                  confirmAlert({
-                    title: t('common.areYouSure'),
-                    message: t('home.areYouSureChatDelete'),
-                    overlayClassName: 'bg-slate-700 text-white',
-                    buttons: [
-                      {
-                        label: t('common.yes'),
-                        onClick: () => deleteChat({
-                          variables: {
-                            chatId: chat._id,
-                          },
-                        }),
-                      },
-                      {
-                        label: t('common.no'),
-                      },
-                    ],
-                  });
-                }}
+                onClick={() => setToDeleteChat(chat._id)}
               >
                 <Trash className="w-5 h-5" />
               </button>
@@ -65,6 +48,22 @@ const ChatList = ({
           </div>
         ))}
       </div>
+      <ConfirmationModal
+        open={!!toDeleteChat}
+        cancelCb={() => {
+          setToDeleteChat(null);
+        }}
+        confirmCb={() => {
+          handleChatChange(chats.find((chat) => chat._id !== toDeleteChat)?._id || null);
+          deleteChat({
+            variables: {
+              chatId: toDeleteChat,
+            },
+          });
+          setToDeleteChat(null);
+        }}
+        description="confirmationModal.deleteChat"
+      />
     </div>
   );
 };

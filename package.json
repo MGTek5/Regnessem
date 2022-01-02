@@ -17,7 +17,6 @@
     "namez": "^1.1.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
-    "react-confirm-alert": "^2.7.0",
     "react-dom": "^17.0.2",
     "react-hot-toast": "^2.1.1",
     "react-i18next": "^11.13.0",

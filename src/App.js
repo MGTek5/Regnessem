@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import { Toaster } from 'react-hot-toast';
-import 'react-confirm-alert/src/react-confirm-alert.css';
 import client from './utils/apollo';
 import Page from './components/Page';
 import Router from './Router';

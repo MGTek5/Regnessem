@@ -51,6 +51,13 @@
       "username": "Nom d'utilisateur",
       "chatName": "Nom de la conversation"
     },
+    "confirmationModal": {
+      "confirm": "Confirmer",
+      "cancel": "Annuler",
+      "areYouSure": "Etes-vous sûr ?",
+      "deleteChat": "Vous êtes sur le point de supprimer cette conversation.\nCette action est irréversible.",
+      "deleteAccount": "Voulez vous vraiment supprimer votre compte ?"
+    },
     "common": {
       "error": "Il y a eu un problème",
       "loading": "Chargement en cours...",
