@@ -41,10 +41,10 @@
       "areYouSureChatDelete": "etes-vous sure de vouloir eliminer ce chat ?"
     },
     "profile": {
-      "changeGif": "Nouveau GIF de profil",
-      "changeUsername": "Nouveau nom d'utilisateur",
-      "changeEmail": "Nouvelle adresse email",
-      "changePassword": "Nouveau mot de passe"
+      "changeGif": "URL du GIF de profil",
+      "changeUsername": "Nom d'utilisateur",
+      "changeEmail": "Adresse email",
+      "changePassword": "Mot de passe"
     },
     "chatCreationForm": {
       "search": "Chercher par nom d'utilisateur",

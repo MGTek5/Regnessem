@@ -27,7 +27,7 @@ const Profile = () => {
       try {
         if (newUser.password === '') delete newUser.password;
         const data = await updateUser({ variables: { userUpdateData: newUser } });
-        userContext.user = data.data.updateUser;
+        userContext.setUser(data.data.updateUser);
         history.push('/');
       } catch (e) {
         toast.error(t('common.error'));
@@ -36,51 +36,61 @@ const Profile = () => {
   });
 
   return (
-    <div className="flex flex-col h-full w-full items-center">
-      <Picto members={[userContext.user]} />
-      <form onSubmit={formik.handleSubmit} className="flex flex-col h-full w-full justify-around items-center mt-4">
-        <Input
-          value={formik.values.profileGif}
-          label={t('profile.changeGif')}
-          name="profileGif"
-          type="text"
-          id="profileGif"
-          required={false}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-        />
-        <Input
-          value={formik.values.username}
-          label={t('profile.changeUsername')}
-          name="username"
-          type="text"
-          id="username"
-          required={false}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-        />
-        <Input
-          value={formik.values.email}
-          label={t('profile.changeEmail')}
-          name="email"
-          type="email"
-          id="email"
-          required={false}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-        />
-        <Input
-          value={formik.values.password}
-          label={t('profile.changePassword')}
-          name="password"
-          type="password"
-          id="password"
-          required={false}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-        />
-        <button type="submit" className="btn btn-primary">{t('button.submit')}</button>
-      </form>
+    <div className="flex flex-col h-full w-full items-center justify-center">
+      <div className="flex flex-col items-center justify-center p-8 bg-gray-900 rounded-xl shadow-xl">
+        <div className="h-28">
+          <Picto members={[userContext.user]} className="relative h-28 w-28" />
+        </div>
+        <form onSubmit={formik.handleSubmit} className="flex flex-col h-full w-full justify-around items-center mt-4">
+          <Input
+            value={formik.values.profileGif}
+            label={t('profile.changeGif')}
+            name="profileGif"
+            type="link"
+            id="profileGif"
+            className="w-96"
+            required={false}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+          />
+          <Input
+            value={formik.values.username}
+            label={t('profile.changeUsername')}
+            name="username"
+            type="text"
+            id="username"
+            className="w-96"
+            required={false}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+          />
+          <Input
+            value={formik.values.email}
+            label={t('profile.changeEmail')}
+            name="email"
+            type="email"
+            id="email"
+            className="w-96"
+            required={false}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+          />
+          <Input
+            value={formik.values.password}
+            label={t('profile.changePassword')}
+            name="password"
+            type="password"
+            id="password"
+            className="w-96"
+            required={false}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+          />
+          <div className="w-full flex items-end p-2 justify-end">
+            <button type="submit" className="btn btn-primary mt-4">{t('button.submit')}</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

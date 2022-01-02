@@ -30,7 +30,9 @@ const ChatList = ({
                 className="flex items-center pl-2 py-2 w-full text-white outline-none"
                 onClick={() => handleChatChange(chat._id)}
               >
-                <Picto members={chat.members} />
+                <div>
+                  <Picto members={chat.members} />
+                </div>
                 <span className="ml-3">{chat.name}</span>
               </button>
               <button

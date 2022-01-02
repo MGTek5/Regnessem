@@ -41,10 +41,10 @@
       "areYouSureChatDelete": "are you sure you want to delete this chat?"
     },
     "profile": {
-      "changeGif": "Change Profile GIF",
-      "changeUsername": "Change Username",
-      "changeEmail": "Change Email",
-      "changePassword": "Change Password"
+      "changeGif": "Profile GIF URL",
+      "changeUsername": "Username",
+      "changeEmail": "Email",
+      "changePassword": "Password"
     },
     "chatCreationForm": {
       "search": "Search by username",
