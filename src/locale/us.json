@@ -44,7 +44,10 @@
       "changeGif": "Profile GIF URL",
       "changeUsername": "Username",
       "changeEmail": "Email",
-      "changePassword": "Password"
+      "changePassword": "Password",
+      "dangerZone": "Danger zone",
+      "deleteAccount": "Delete my account",
+      "proceed": "Proceed"
     },
     "chatCreationForm": {
       "search": "Search by username",
