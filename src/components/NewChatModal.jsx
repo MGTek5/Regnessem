@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Proptypes from 'prop-types';
+import * as namez from 'namez';
 import UserModel from '../types/user';
 import UserContext from '../contexts/user.context';
 import Input from './Input';
@@ -15,6 +16,7 @@ const NewChatModal = ({
   const [userFilter, setUserFilter] = useState('');
   const userContext = useContext(UserContext);
   const [selectedUsers, setSelectedUsers] = useState([]);
+  const [chatName, setChatName] = useState(namez({ format: 'title', separator: ' ' }));
 
   useEffect(() => {
     if (userContext.user && selectedUsers) {
@@ -22,22 +24,36 @@ const NewChatModal = ({
         setSelectedUsers((old) => [userContext.user._id, ...old]);
       }
     }
-  }, [userContext, selectedUsers]);
+  }, [selectedUsers, userContext]);
 
   return (
     <div className={'modal '.concat(isOpen ? 'modal-open' : '')}>
       <div className="modal-box">
         <h2 className="text-center font-bold mb-2 pb-2 border-b border-purple-500">{t('home.new')}</h2>
+        <div className="border-b border-gray-500 pb-2">
+          <Input
+            value={chatName}
+            label={t('chatCreationForm.chatName')}
+            type="text"
+            name="chatCreation"
+            placeholder={t('chatCreationForm.search')}
+            className="input input-primary input-bordered target:outline-none outline-none w-full mb-4 mt-1"
+            onChange={(e) => setChatName(e.target.value)}
+          />
+
+        </div>
         <Input
+          value={userFilter}
           label={t('chatCreationForm.username')}
           type="text"
+          name="chatCreation"
           placeholder={t('chatCreationForm.search')}
           className="input input-primary input-bordered target:outline-none outline-none w-full mb-4 mt-1"
           onChange={(e) => setUserFilter(e.target.value)}
         />
         <div className="w-full max-h-96 overflow-y-auto overflow-x-hidden scrollbar-w-2 scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-gray">
           {users.filter((user) => user.username.includes(userFilter)
-              && user._id !== userContext?.user?._id)
+            && user._id !== userContext.user?._id)
             .map((user) => (
               <button
                 type="button"
@@ -73,7 +89,7 @@ const NewChatModal = ({
             className="btn btn-primary p-4 py-2 hover:underline disabled:btn-disabled"
             type="button"
             onClick={() => {
-              createCb(selectedUsers);
+              createCb(selectedUsers, chatName);
               setSelectedUsers([]);
             }}
             disabled={selectedUsers.length <= 1}

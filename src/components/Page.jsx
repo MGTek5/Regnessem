@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Page = ({ children }) => (
-  <div className="w-screen h-full max-h-full bg-gray-800 text-white">
+  <main className="w-screen h-full max-h-full bg-slate-800 text-white overflow-auto lg:overflow-hidden">
     {children}
-  </div>
+  </main>
 );
 
 Page.propTypes = {

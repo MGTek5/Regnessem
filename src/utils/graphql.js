@@ -8,6 +8,7 @@ const LOGIN = gql`
         _id
         email
         username
+        profileGif
       }
     }
   }
@@ -41,6 +42,7 @@ const GET_CHATS = gql`
     getChats {
       _id
       name
+      lastMessage
       members {
         _id
         profileGif
@@ -55,6 +57,7 @@ const CREATE_CHAT = gql`
     createChat(chatCreateData: $chatCreateData) {
       _id
       name
+      lastMessage
       members {
         _id
         profileGif
@@ -64,16 +67,33 @@ const CREATE_CHAT = gql`
   }
 `;
 
+const DELETE_CHAT = gql`
+  mutation($chatId: String!) {
+    deleteChat(id: $chatId) {
+      _id
+    }
+  }
+`;
+
 const CHAT_CREATED = gql`
   subscription {
     chatCreated {
       _id
       name
+      lastMessage
       members {
         _id
         username
         profileGif
       }
+    }
+  }
+`;
+
+const CHAT_DELETED = gql`
+  subscription {
+    chatDeleted {
+      _id
     }
   }
 `;
@@ -121,14 +141,37 @@ const CREATE_MESSAGE = gql`
   }
 `;
 
+const UPDATE_USER = gql`
+  mutation ($userUpdateData: UserUpdateInput!) {
+    updateUser(userUpdateData: $userUpdateData) {
+      _id
+      username
+      email
+      profileGif
+    }
+  }
+`;
+
+const DELETE_USER = gql`
+  mutation($userId: String!) {
+    deleteUser(id: $userId) {
+      _id
+    }
+  }
+`;
+
 export {
   REGISTER,
   LOGIN,
   GET_USERS,
   GET_CHATS,
   CREATE_CHAT,
+  DELETE_CHAT,
   CHAT_CREATED,
+  CHAT_DELETED,
   GET_MESSAGES,
   MESSAGE_CREATED,
   CREATE_MESSAGE,
+  UPDATE_USER,
+  DELETE_USER,
 };

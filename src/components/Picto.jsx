@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Proptypes from 'prop-types';
 import UserModel from '../types/user';
 
@@ -7,24 +7,20 @@ const Picto = ({
   className,
 }) => {
   const DEFAULT_PIC = '/defaultPic.jpeg';
-  const [filteredUsers, setFilteredUsers] = useState([]);
 
-  useEffect(() => {
-    setFilteredUsers(members);
-  }, [members]);
-
-  const getOpacityClass = () => (
-    `opacity-${Math.trunc(100 / filteredUsers.length)}`
+  const getOpacity = () => (
+    `${Math.trunc(100 / members.length)}%`
   );
 
   return (
     <div className={className}>
-      {filteredUsers.map((user) => (
+      {members.map((user) => (
         <img
           alt=""
           src={user.profileGif || DEFAULT_PIC}
           key={user.profileGif || `${Math.random()}-random-id-picto`}
-          className={`absolute ${getOpacityClass()} h-full w-full top-0 left-0 rounded-full`}
+          className="absolute h-full w-full top-0 left-0 rounded-full"
+          style={{ opacity: getOpacity() }}
         />
       ))}
     </div>

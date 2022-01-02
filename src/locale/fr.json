@@ -35,14 +35,38 @@
       "searchBar": "Rechercher un GIF",
       "nothingToShow": "Il n'a y a rien a voir ici",
       "searchSomething": "Essayer de rechercher quelque chose...",
-      "sendMessage": "Envoyer un GIF pour lancer la conversation"
+      "sendMessage": "Envoyer un GIF pour lancer la conversation",
+      "navigateToMessage": "Y aller",
+      "newMessageAlert": "Nouveau(x) message(s) dans la conversation",
+      "areYouSureChatDelete": "etes-vous sure de vouloir eliminer ce chat ?"
+    },
+    "profile": {
+      "changeGif": "URL du GIF de profil",
+      "changeUsername": "Nom d'utilisateur",
+      "changeEmail": "Adresse email",
+      "changePassword": "Mot de passe",
+      "dangerZone": "Zone de danger",
+      "deleteAccount": "Supprimer mon compte",
+      "proceed": "Procéder"
     },
     "chatCreationForm": {
       "search": "Chercher par nom d'utilisateur",
-      "username": "Nom d'utilisateur"
+      "username": "Nom d'utilisateur",
+      "chatName": "Nom de la conversation"
+    },
+    "confirmationModal": {
+      "confirm": "Confirmer",
+      "cancel": "Annuler",
+      "areYouSure": "Etes-vous sûr ?",
+      "deleteChat": "Vous êtes sur le point de supprimer cette conversation.\nCette action est irréversible.",
+      "deleteAccount": "Voulez vous vraiment supprimer votre compte ?"
     },
     "common": {
-      "error": "Il y a eu un problème"
+      "error": "Il y a eu un problème",
+      "loading": "Chargement en cours...",
+      "areYouSure": "Etes-vous sûr ?",
+      "yes": "Oui",
+      "no": "Non"
     }
   }
 }
