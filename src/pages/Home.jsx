@@ -8,7 +8,6 @@ import {
   useLazyQuery,
 } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import * as namez from 'namez';
 import toast from 'react-hot-toast';
 import { Howl, Howler } from 'howler';
 import NewChatModal from '../components/NewChatModal';
@@ -215,11 +214,11 @@ const Home = () => {
         users={users}
         isOpen={newChatModalOpen}
         closeCb={() => setNewChatModalOpen(false)}
-        createCb={(selectedUsers) => {
+        createCb={(selectedUsers, chatName) => {
           createChat({
             variables: {
               chatCreateData: {
-                name: namez({ format: 'title', separator: ' ' }),
+                name: chatName,
                 members: selectedUsers,
               },
             },

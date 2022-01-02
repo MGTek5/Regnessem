@@ -48,7 +48,8 @@
     },
     "chatCreationForm": {
       "search": "Search by username",
-      "username": "Username"
+      "username": "Username",
+      "chatName": "Conversation name"
     },
     "common": {
       "error": "Something went wrong",
