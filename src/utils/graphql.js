@@ -152,6 +152,14 @@ const UPDATE_USER = gql`
   }
 `;
 
+const DELETE_USER = gql`
+  mutation($userId: String!) {
+    deleteUser(id: $userId) {
+      _id
+    }
+  }
+`;
+
 export {
   REGISTER,
   LOGIN,
@@ -165,4 +173,5 @@ export {
   MESSAGE_CREATED,
   CREATE_MESSAGE,
   UPDATE_USER,
+  DELETE_USER,
 };

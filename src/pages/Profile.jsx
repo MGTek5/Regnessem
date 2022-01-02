@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
@@ -7,12 +7,15 @@ import toast from 'react-hot-toast';
 import Picto from '../components/Picto';
 import Input from '../components/Input';
 import UserContext from '../contexts/user.context';
-import { UPDATE_USER } from '../utils/graphql';
+import { UPDATE_USER, DELETE_USER } from '../utils/graphql';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 const Profile = () => {
   const { t } = useTranslation();
   const userContext = useContext(UserContext);
   const [updateUser] = useMutation(UPDATE_USER);
+  const [deleteUser] = useMutation(DELETE_USER);
+  const [isDeleteAccountModalOpen, setIsDeleteAccountModalOpen] = useState(false);
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
@@ -37,7 +40,7 @@ const Profile = () => {
 
   return (
     <div className="flex flex-col h-full w-full items-center justify-center">
-      <div className="flex flex-col items-center justify-center p-8 bg-gray-900 rounded-xl shadow-xl">
+      <div className="flex flex-col items-center justify-center p-8 bg-gray-900 rounded-xl shadow-xl w-full md:w-1/4">
         <div className="h-28">
           <Picto members={[userContext.user]} className="relative h-28 w-28" />
         </div>
@@ -91,6 +94,32 @@ const Profile = () => {
           </div>
         </form>
       </div>
+      <div className="bg-gray-900 shadow-xl rounded-xl w-full md:w-1/4 mt-3 px-8 border border-red-500">
+        <h2 className="font-bold text-xl text-center mt-2 pb-2 border-b ">{t('profile.dangerZone')}</h2>
+        <div className="mt-2 mb-8 pt-4 items-center justify-center flex">
+          <span className="flex justify-between w-full items-center">
+            <span>{t('profile.deleteAccount')}</span>
+            <button type="button" className="btn btn-outline btn-error" onClick={() => setIsDeleteAccountModalOpen(true)}>{t('profile.proceed')}</button>
+          </span>
+        </div>
+      </div>
+      <ConfirmationModal
+        open={isDeleteAccountModalOpen}
+        confirmCb={() => {
+          setIsDeleteAccountModalOpen(false);
+          history.push('/register');
+          deleteUser({
+            variables: {
+              userId: userContext.user._id,
+            },
+          });
+          userContext.setUser(null);
+        }}
+        cancelCb={() => {
+          setIsDeleteAccountModalOpen(false);
+        }}
+        description="confirmationModal.deleteAccount"
+      />
     </div>
   );
 };
